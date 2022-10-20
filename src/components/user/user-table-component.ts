@@ -1,6 +1,7 @@
 import { html, render } from "lit-html"
-import { User } from "../model/user"
-import userService from "../user-service"
+import { USER_SELECTED_EVENT } from "."
+import { User } from "../../model/user"
+import userService from "../../user-service"
 
 console.log("JUHU!!!")
 
@@ -38,7 +39,8 @@ class UserTableComponent extends HTMLElement {
         users.forEach(user => {
             const row = tbody.insertRow()
             row.onclick = () => {
-                alert(`user ${user.name} clicked`)
+                const event = new CustomEvent(USER_SELECTED_EVENT, {detail: {user}})
+                this.dispatchEvent(event)
             }
             render(rowTemplate(user), row)
         });

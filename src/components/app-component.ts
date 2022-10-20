@@ -19,8 +19,8 @@ class AppComponent extends HTMLElement {
     }
     private render() {
         render(template, this.shadowRoot)
-        const userTableComponent: HTMLElement = this.shadowRoot.querySelector("user-table")
-        const userComponent: HTMLElement = this.shadowRoot.querySelector("user-component")
+        const userTableComponent = this.shadowRoot.querySelector<HTMLElement>("user-table")
+        const userComponent = this.shadowRoot.querySelector<HTMLElement>("user-component")
         userTableComponent.addEventListener(USER_SELECTED_EVENT, (e: CustomEvent) => {
             const user = e.detail.user
             userComponent.setAttribute("selected-user", user.id)

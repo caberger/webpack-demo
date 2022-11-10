@@ -1,12 +1,16 @@
-import { User } from "./model/user"
+import produce from "immer"
+import store from "./model/store"
 
 const USER_URL = "https://jsonplaceholder.typicode.com/users"
 
 class UserService {
-    async fetchAll(): Promise<[User]> {
+    async fetchAll() {
         const response = await fetch(USER_URL)
         const users = await response.json()
-        return users
+        let nextState = produce(store.getValue(), draft => {
+            draft.users = users
+        })
+        store.next(nextState)
     }
 }
 

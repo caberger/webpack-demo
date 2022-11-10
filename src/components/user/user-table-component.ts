@@ -2,6 +2,7 @@ import { html, render } from "lit-html"
 import { USER_SELECTED_EVENT } from "."
 import { User } from "../../model/user"
 import userService from "../../user-service"
+import store from "../../model/store"
 
 const tableTemplate = html`
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -18,18 +19,18 @@ const rowTemplate = (user: User) => html`
     <td>${user.id}</td><td>${user.name}</td>
 `
 class UserTableComponent extends HTMLElement {
-    private users: [User]
-
     constructor() {
         super()
         this.attachShadow({ mode: "open" })
     }
-    async connectedCallback() {
+    connectedCallback() {
         console.log("connected usertable")
-        this.users = await this.load()
-        this.render(this.users)
+        userService.fetchAll()
+        store.subscribe(model => {
+            this.render(model.users)
+        })
     }
-    private render(users: [User]) {
+    private render(users: Array<User>) {
         render(tableTemplate, this.shadowRoot)
 
         const tbody = this.shadowRoot.querySelector("tbody")
@@ -41,10 +42,6 @@ class UserTableComponent extends HTMLElement {
             }
             render(rowTemplate(user), row)
         });
-    }
-    private async load(): Promise<[User]>{
-        const users = await userService.fetchAll()
-        return users
     }
 }
 

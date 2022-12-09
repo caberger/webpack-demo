@@ -2,12 +2,11 @@ package at.ac.htl.leonding.demo.entity.user;
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import com.oracle.svm.core.annotate.Inject;
-
-@RequestScoped
+@ApplicationScoped
 public class UserRepository {
     @Inject EntityManager em;
 

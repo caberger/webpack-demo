@@ -1,7 +1,7 @@
 import produce from "immer"
 import store from "./model/store"
 
-const USER_URL = "https://jsonplaceholder.typicode.com/users"
+const USER_URL = "http://localhost:4200/api/user"
 
 class UserService {
     async fetchAll() {

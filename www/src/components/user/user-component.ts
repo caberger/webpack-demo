@@ -11,7 +11,6 @@ class UserComponent extends HTMLElement{
     }
     connectedCallback() {
         this.render()
-        
     }
     private render() {
         render(template, this.shadowRoot)

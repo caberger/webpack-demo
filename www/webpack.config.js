@@ -13,6 +13,7 @@ module.exports = {
       }
     ]
   },
+  devtool: "cheap-source-map",
   resolve: {
     extensions: ['.ts', '.js'],
   },
@@ -29,5 +30,8 @@ module.exports = {
         },
         compress: true,
         port: 4200,
+        proxy: {
+          '/api': 'http://localhost:8080',
+        }
     },    
 }

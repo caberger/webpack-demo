@@ -9,9 +9,9 @@ index.html and other files must be copied to the persistent volume nginx-www, th
 ~~~bash
 pushd ../backend
 mvn clean compile package install
+popd
 docker image tag caberger/webpack-demo:1.0.0-SNAPSHOT ghcr.io/caberger/webpack-demo:latest
 docker push ghcr.io/caberger/webpack-demo:latest
-popd
 kubectl delete -f appsrv.yaml
 kubectl apply -f namespace.yaml
 kubectl apply -f postgres.yaml

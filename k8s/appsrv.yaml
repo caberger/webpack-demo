@@ -17,15 +17,16 @@ spec:
       containers:
         - name: appsrv
           image: ghcr.io/caberger/webpack-demo:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
 #     The init container waits in a loop until postgres is available.
       initContainers:
         - name: wait
-          #image: postgres:14
-          image: busybox:latest
-          #command: ["/bin/bash", "-c", "until pg_isready --host=postgres --user=$USER; do echo waiting for database as user $USER; sleep 2; done;"]
-          command: ["ping", "postgres"]
+          image: postgres:14
+          #image: busybox:latest
+          #command: ["ping", "postgres"]
+          command: ["/bin/bash", "-c", "until pg_isready --host=postgres --user=$USER; do echo waiting for database as user $USER; sleep 2; done;"]
           env:
             - name: POSTGRES_PASSWORD
               valueFrom:

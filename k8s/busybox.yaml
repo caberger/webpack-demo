@@ -1,0 +1,34 @@
+# this is our swiss army knife.
+# here we use it to copy our web-content to the persistent volume that is mounted by busybox.
+# after deployment busybox sleeps and we can use kubectl cp to copy files to the storage.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox
+  namespace: yaec
+  labels:
+    component: busybox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: busybox
+  template:
+    metadata:
+      labels:
+        component: busybox
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: busybox
+          image: busybox:latest
+          command: ["tail", "-f", "/dev/null"]
+          volumeMounts:
+            - name: html
+              mountPath: /srv
+              readOnly: false
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: nginx-www

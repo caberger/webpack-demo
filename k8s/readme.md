@@ -7,15 +7,21 @@ index.html and other files must be copied to the persistent volume nginx-www, th
 ## deploy
 
 ~~~bash
-pushd backend
+pushd ../backend
 mvn clean compile package install
 docker image tag caberger/webpack-demo:1.0.0-SNAPSHOT ghcr.io/caberger/webpack-demo:latest
 docker push ghcr.io/caberger/webpack-demo:latest
-pushd ../k8s
-kubectl delete -f application.yaml
-kubectl apply -f application.yaml
 popd
-#kubectl -n yaec rollout restart deployment appsrv
-popd
+kubectl delete -f appsrv.yaml
+kubectl apply -f namespace.yaml
+kubectl apply -f postgres.yaml
+kubectl apply -f appsrv.yaml
+kubectl apply -f nginx.yaml
 ~~~
 make the docker image public on ghcr.io
+
+to forward nginx to localhost:
+~~~bash
+./port-forward.sh demo nginx 4200:80
+~~~
+

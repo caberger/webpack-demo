@@ -5,9 +5,9 @@ metadata:
   namespace: demo
 data:
   setup.sql: |
-    DROP database if exists yaec;
-    DROP user if exists yaec;
-    CREATE USER yaec WITH
+    DROP database if exists demo;
+    DROP user if exists demo;
+    CREATE USER demo WITH
       LOGIN
       NOSUPERUSER
       NOCREATEDB
@@ -15,11 +15,11 @@ data:
       INHERIT
       NOREPLICATION
       CONNECTION LIMIT -1
-      PASSWORD 'yaec';
+      PASSWORD 'demo';
  
-    CREATE DATABASE yaec
+    CREATE DATABASE demo
         WITH 
-        OWNER = yaec
+        OWNER = demo
         ENCODING = 'UTF8'
         CONNECTION LIMIT = -1;
   allow-all.sh: |
@@ -48,8 +48,8 @@ metadata:
   namespace: demo
 type: kubernetes.io/basic-auth
 stringData:
-  username: yaec
-  password: yaec
+  username: demo
+  password: demo
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -73,6 +73,7 @@ spec:
       containers:
         - name: postgres
           image: postgres:14
+          imagePullPolicy: Always
           ports:
             - containerPort: 5432
               protocol: TCP
@@ -110,16 +111,3 @@ spec:
             items:
               - key: allow-all.sh
                 path: allow-all.sh
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: demo
-spec:
-  ports:
-    - port: 5432
-      targetPort: 5432
-      protocol: TCP
-  selector:
-    component: postgres

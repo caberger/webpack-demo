@@ -4,6 +4,16 @@
 nginx is configured to forward /api requests to quarkus. 
 index.html and other files must be copied to the persistent volume nginx-www, then they are available in the browser.
 
+## starting minikube
+~~~bash
+minikube start
+~~~
+on osx run:
+~~~bash
+minikube start --driver=hyperkit 
+~~~
+
+
 ## deploy
 
 ~~~bash
@@ -13,10 +23,12 @@ popd
 docker image tag caberger/webpack-demo:1.0.0-SNAPSHOT ghcr.io/caberger/webpack-demo:latest
 docker push ghcr.io/caberger/webpack-demo:latest
 kubectl delete -f appsrv.yaml
+kubectl delete -f busybox-job.yaml
 kubectl apply -f namespace.yaml
 kubectl apply -f postgres.yaml
 kubectl apply -f appsrv.yaml
 kubectl apply -f nginx.yaml
+kubectl apply -f busybox-job.yaml
 ~~~
 make the docker image public on ghcr.io
 

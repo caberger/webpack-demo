@@ -24,8 +24,6 @@ spec:
       initContainers:
         - name: wait
           image: postgres:14
-          #image: busybox:latest
-          #command: ["ping", "postgres"]
           command: ["/bin/bash", "-c", "until pg_isready --host=postgres --user=$USER; do echo waiting for database as user $USER; sleep 2; done;"]
           env:
             - name: POSTGRES_PASSWORD
@@ -47,14 +45,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: appsrv
+  name: quarkus
   namespace: demo
 spec:
   ports:
     - port: 8080
       targetPort: 8080
       protocol: TCP
-      name: appsrv
   selector:
     app: appsrv
   

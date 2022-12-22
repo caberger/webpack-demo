@@ -78,6 +78,11 @@ spec:
             - containerPort: 5432
               protocol: TCP
               name: postgres
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 5
+            periodSeconds: 10               
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data

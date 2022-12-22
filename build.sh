@@ -12,3 +12,7 @@ popd
 pushd k8s
 ./deploy.sh
 popd
+
+pushd www
+./deploy.sh
+popd

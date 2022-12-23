@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: postgres-setup
-  namespace: demo
+  namespace: student-c-aberger
 data:
   setup.sql: |
     DROP database if exists demo;
@@ -30,7 +30,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgresql-data
-  namespace: demo
+  namespace: student-c-aberger
   annotations:
     nfs.io/storage-path: "postgresql-data"
 spec:
@@ -45,7 +45,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: postgres-admin
-  namespace: demo
+  namespace: student-c-aberger
 type: kubernetes.io/basic-auth
 stringData:
   username: demo
@@ -55,7 +55,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgres
-  namespace: demo
+  namespace: student-c-aberger
   labels:
     component: postgres
 spec:
@@ -121,7 +121,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres
-  namespace: demo
+  namespace: student-c-aberger
 spec:
   ports:
     - port: 5432

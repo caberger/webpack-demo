@@ -23,23 +23,9 @@ minikube start --driver=hyperkit
 
 
 ## deploy
-NOTE: In the followiing commands and in ./deploy.sh you must change caberger to your own github user name!
+NOTE: You must change caberger to your own github user name in ./deploy.sh
 
-~~~bash
-pushd ../backend
-mvn clean compile package install
-popd
-docker image tag caberger/webpack-demo:1.0.0-SNAPSHOT ghcr.io/caberger/webpack-demo:latest
-docker push ghcr.io/caberger/webpack-demo:latest
-kubectl delete -f appsrv.yaml
-kubectl delete -f busybox-job.yaml
-kubectl apply -f namespace.yaml
-kubectl apply -f postgres.yaml
-kubectl apply -f appsrv.yaml
-kubectl apply -f nginx.yaml
-kubectl apply -f busybox-job.yaml
-~~~
-make the docker image public on ghcr.io
+DO NOT FORGET: make the docker image public on ghcr.io
 
 to forward nginx to localhost:
 ~~~bash

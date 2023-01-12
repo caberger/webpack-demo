@@ -21,4 +21,4 @@ The following technologies are used[^learning]:
 
 for a visualization of rxjs also see [RxMarbles](https://rxmarbles.com/)
 
-[^learning]: In parts this technology stack builds one on the other. For learning I recommend to study the things from the bottom up.
+[^learning]: In parts this technology stack builds one on the other. For learning I recommend to study the things from the bottom up. As a precondition a good understanding of linux and javascript and a development environment is required.

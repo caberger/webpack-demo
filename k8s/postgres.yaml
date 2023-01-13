@@ -73,7 +73,6 @@ spec:
       containers:
         - name: postgres
           image: postgres:14
-          imagePullPolicy: Always
           ports:
             - containerPort: 5432
               protocol: TCP
@@ -81,7 +80,7 @@ spec:
           readinessProbe:
             tcpSocket:
               port: 5432
-            initialDelaySeconds: 5
+            initialDelaySeconds: 20
             periodSeconds: 10               
           volumeMounts:
             - name: postgres-data

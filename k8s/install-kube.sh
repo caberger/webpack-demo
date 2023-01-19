@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# minikube install script for users, that have no root permissions
+# restart terminal after running this.
+
 DEST=~/.local/bin
 
 mkdir -p $DEST

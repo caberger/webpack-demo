@@ -50,7 +50,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: quarkus
+  name: appsrv
   namespace: student-c-aberger
 spec:
   ports:

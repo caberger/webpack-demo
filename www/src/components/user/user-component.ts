@@ -1,7 +1,7 @@
 import { html, render } from "lit-html"
 
 const template = html`
-    <div>User: Max Mustermann</div>
+    <div></div>
 ` 
 
 class UserComponent extends HTMLElement{

@@ -23,8 +23,17 @@ spec:
           readinessProbe:
             tcpSocket:
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10            
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /api/q/health
+              port: 8080
+              httpHeaders:
+              - name: X-Aberger-Was-Here
+                value: "yes"
+            initialDelaySeconds: 10
+            periodSeconds: 60                     
 #     The init container waits in a loop until postgres is available.
       initContainers:
         - name: wait

@@ -81,7 +81,7 @@ spec:
             tcpSocket:
               port: 5432
             initialDelaySeconds: 20
-            periodSeconds: 10               
+            periodSeconds: 30               
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data

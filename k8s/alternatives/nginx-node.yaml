@@ -1,4 +1,3 @@
-# nginx Web Server
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -27,9 +26,6 @@ spec:
             - name: www
               mountPath: /usr/share/nginx/html
               readOnly: true
-        - name: build
-          image: node:slim
-          command: ["tail", "-f", "/dev/null"]
       volumes:
         - name: default-conf
           configMap:

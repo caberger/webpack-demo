@@ -1,37 +1,42 @@
+# nginx Web Server
+
 # does not work, test only
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: knife
   namespace: student-c-aberger
 spec:
-  backoffLimit: 1
-  activeDeadlineSeconds: 1800
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
   template:
+    metadata:
+      labels:
+        app: nginx
     spec:
       containers:
       - name: busybox
         image: busybox:latest
-        command: ["/bin/sh", "-c"]
-        args: 
-          - if [[ -e /srv/demo/index.html ]]
-            then
-              echo "web content already present, nothing to do";
-            else
-              pushd /srv
-              rm -rf demo
-              curl -o dist.tgz https://github.com/caberger/webpack-demo/releases/download/v0.2.0-alpha/dist.tgz
-              tar -xzf dist.tgz
-              mv dist demo
-            fi
-            sleep 900
-            echo done
+        command: ["tail", "-f", "/dev/null"]
+        workingDir: /root  
         volumeMounts:
         - name: html
           mountPath: /srv
           readOnly: false
+        - name: setup-script
+          mountPath: /usr/local/bin
       volumes:
         - name: html
           persistentVolumeClaim:
             claimName: nginx-www
-      restartPolicy: Never
+        - name: setup-script
+          configMap:
+            name: download-webcontent
+            defaultMode: 0744
+            items:
+              - key: download-webcontent.sh
+                path: download-webcontent.sh
+
+

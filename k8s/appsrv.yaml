@@ -20,41 +20,25 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          readinessProbe:
+          startupProbe:
             tcpSocket:
               port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/q/health
+              port: 8080
+            timeoutSeconds: 5
             initialDelaySeconds: 10
-            periodSeconds: 30
+            periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /api/q/health
               port: 8080
-              httpHeaders:
-              - name: X-Aberger-Was-Here
-                value: "yes"
-            initialDelaySeconds: 10
-            periodSeconds: 60                     
-#     The init container waits in a loop until postgres is available.
-      initContainers:
-        - name: wait
-          image: postgres:14
-          command: ["/bin/bash", "-c", "until pg_isready --host=postgres --user=$USER; do echo waiting for database as user $USER; sleep 2; done;"]
-          env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-admin
-                  key: password
-            - name: USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-admin
-                  key: username
-            - name: PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-admin
-                  key: password
+            timeoutSeconds: 5
+            initialDelaySeconds: 60
+            periodSeconds: 60                
 ---
 apiVersion: v1
 kind: Service

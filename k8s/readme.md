@@ -32,3 +32,6 @@ to forward nginx to localhost:
 ./port-forward.sh demo nginx 4200:80
 ~~~
 
+## appsrv
+
+Here the application server does not wait for the database in a loop. Instead the livenessProbe will fail an the situation is handled by the kube controller

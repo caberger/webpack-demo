@@ -1,0 +1,37 @@
+# does not work, test only
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: knife
+  namespace: student-c-aberger
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 1800
+  template:
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:latest
+        command: ["/bin/sh", "-c"]
+        args: 
+          - if [[ -e /srv/demo/index.html ]]
+            then
+              echo "web content already present, nothing to do";
+            else
+              pushd /srv
+              rm -rf demo
+              curl -o dist.tgz https://github.com/caberger/webpack-demo/releases/download/v0.2.0-alpha/dist.tgz
+              tar -xzf dist.tgz
+              mv dist demo
+            fi
+            sleep 900
+            echo done
+        volumeMounts:
+        - name: html
+          mountPath: /srv
+          readOnly: false
+      volumes:
+        - name: html
+          persistentVolumeClaim:
+            claimName: nginx-www
+      restartPolicy: Never

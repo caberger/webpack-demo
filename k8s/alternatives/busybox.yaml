@@ -10,16 +10,24 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: busybox
   template:
     metadata:
       labels:
-        app: nginx
+        app: busybox
     spec:
       containers:
       - name: busybox
         image: busybox:latest
-        command: ["tail", "-f", "/dev/null"]
+        command: ["/bin/sh", "-c", "/usr/local/bin/download-webcontent.sh"]
+        args: 
+          - /usr/local/bin/download-webcontent.sh;
+            tail -f /dev/null;
+        env:
+            - name: ARCHIVE_URL_TO_DOWNLOAD
+              value: https://github.com/caberger/webpack-demo/releases/download/v0.2.0-alpha/dist.tgz
+            - name: DESTINATION_FOLDER
+              value: /srv
         workingDir: /root  
         volumeMounts:
         - name: html

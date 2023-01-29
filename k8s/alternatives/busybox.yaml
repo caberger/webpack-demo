@@ -19,7 +19,7 @@ spec:
       containers:
       - name: busybox
         image: busybox:latest
-        command: ["/bin/sh", "-c", "/usr/local/bin/download-webcontent.sh"]
+        command: ["/bin/sh", "-c"]
         args: 
           - /usr/local/bin/download-webcontent.sh;
             tail -f /dev/null;

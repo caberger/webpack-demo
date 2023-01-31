@@ -1,4 +1,4 @@
-# nginx Web Server
+# download and deploy files for init containers
 
 # does not work, test only
 apiVersion: apps/v1

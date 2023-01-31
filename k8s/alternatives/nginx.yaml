@@ -59,7 +59,7 @@ data:
   default.conf: |
     server {
         listen 80;
-        root /usr/share/nginx/html/demo;
+        root /usr/share/nginx/html;
         rewrite_log on;
         error_log /dev/stdout debug;
 

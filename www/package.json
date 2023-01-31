@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testdeck/mocha": "^0.3.3",
     "chai": "^4.3.7",
     "html-webpack-plugin": "^5.5.0",

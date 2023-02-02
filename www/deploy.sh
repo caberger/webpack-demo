@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-#npm install
-#npm run build
+npm install
+npm run build
 
 KNIFE_POD=""
 findPod() {

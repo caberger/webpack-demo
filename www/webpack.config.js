@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
-module.exports = {
+module.exports = env => ({
   entry: './src/index.ts',
   mode: "development",
   module: {
@@ -34,4 +34,4 @@ module.exports = {
           '/api': 'http://localhost:8080',
         }
     },    
-}
+})

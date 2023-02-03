@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 pushd backend
-mvn clean package install
+mvn clean
+mvn package install || exit
 popd
 
-#pushd www
-#npm install
-#npm run build
-#popd
+pushd www
+npm install
+npm run build || exit
+popd
 
 pushd k8s
 ./deploy.sh

@@ -1,5 +1,5 @@
 import { setUsers } from "./model/store"
-const USER_URL = "///api/user"
+const USER_URL = "./api/user"
 
 class UserService {
     async fetchAll() {

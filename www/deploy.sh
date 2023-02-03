@@ -11,6 +11,7 @@ waitForPod() {
     local pod=""
     while [ "$KNIFE_POD." == "." ]; do
         findPod $1
+        echo "waiting for busybox pod to be ready..."        
         sleep 1
     done;
     echo "pod $KNIFE_POD ready"

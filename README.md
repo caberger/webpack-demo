@@ -18,5 +18,5 @@ follow the steps in [readme.md](./k8s/readme.md) in the k8s folder
 
 Then run
 ```bash
-./build.sh
+./build-and-deploy.sh
 ```

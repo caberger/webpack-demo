@@ -1,33 +1,34 @@
-//import {suite, test, should } from "./utility"
-import { suite, test } from '@testdeck/mocha';
+import { suite, test } from '@testdeck/mocha'
 import store, { setUsers } from "../src/model/store"
-import { map } from "rxjs"
 import { User } from "../src/model/user"
 import * as chai from "chai"
+import { map } from 'rxjs'
 
 @suite
 export class StoreTest {
     private users: User[]
+
     before() {
-        console.log("setup")
         this.users = [{id: 1, name: "John Doe"}]
     }
-    @test 'store should call subscribe function twice when users change'() {
-        let responses = Array<User[]>()
+    @test 'given store when subscribed it should deliver empty model'() {
+        store.subscribe(model => {
+            chai.expect(model.users.length == 0)
+        })
+    }
+    @test 'given empty store when setting John Doe store should call subscribe function twice whith 2nd as John Doe'() {
+        let actualResponses = Array<User[]>()
         store
             .pipe(
                 map(model => model.users)
             )
             .subscribe(users => {
-                responses.push(users);
-                console.log("users changed", users, responses)
+                actualResponses.push(users)
             })
-
         setUsers(this.users)
-        chai.expect(responses).to.have.lengthOf(2)
-        chai.expect(responses[0]).to.have.lengthOf(0)
-        chai.expect(responses[1][0].name).to.equal("John Doe")
-        console.log("test ended", responses)
+        chai.expect(actualResponses).to.have.lengthOf(2)
+        chai.expect(actualResponses[0]).to.have.lengthOf(0)
+        chai.expect(actualResponses[1][0].name).to.equal("John Doe")
     }
 }
 

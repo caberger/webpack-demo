@@ -26,7 +26,7 @@ class AppComponent extends HTMLElement {
             userComponent.setAttribute("selected-user", user.id)
             userComponent.style.display = "block"
             userTableComponent.style.display = "none"
-            console.log("user selected:", user)
+            console.log("event: user selected:", user)
         })
     }
 }

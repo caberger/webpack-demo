@@ -6,14 +6,10 @@ import store from "../../model/store"
 import { distinctUntilChanged, map } from "rxjs"
 
 const rowTemplate = (user: User, onclick: (user: User) => void) => html`
-    <tr @click=${() => userClicked(user)}>
+    <tr @click=${() => onclick(user)}>
         <td >${user.id}</td><td>${user.name}</td>
     </tr>
 `
-function userClicked(user: User) {
-    alert(`user ${user.name} selected`)
-    this.dispatchEvent(new CustomEvent(USER_SELECTED_EVENT, {detail: {user}}))
-}
 class UserTableComponent extends HTMLElement {
     constructor() {
         super()
@@ -32,7 +28,11 @@ class UserTableComponent extends HTMLElement {
             })
     }
     private render(users: Array<User>) {
-        const rows = users.map(user => rowTemplate(user, user => userClicked(user)))
+        const userClicked = (user: User) => {
+            alert(`user ${user.name} selected`)
+            this.dispatchEvent(new CustomEvent(USER_SELECTED_EVENT, {detail: {user}}))
+        }
+        const rows = users.map(user => rowTemplate(user, userClicked))
         const tableTemplate = html`
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <table class="w3-table-all">

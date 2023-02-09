@@ -5,19 +5,11 @@ import userService from "../../user-service"
 import store from "../../model/store"
 import { distinctUntilChanged, map } from "rxjs"
 
-const tableTemplate = html`
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <table class="w3-table-all">
-        <thead>
-            <tr>
-                <th>Id</th><th>Name</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-`
-const rowTemplate = (user: User) => html`
-    <td>${user.id}</td><td>${user.name}</td>
+
+const rowTemplate = (user: User, onclick: (user: User) => void) => html`
+    <tr @click=${() => onclick(user)}>
+        <td >${user.id}</td><td>${user.name}</td>
+    </tr>
 `
 class UserTableComponent extends HTMLElement {
     constructor() {
@@ -37,17 +29,25 @@ class UserTableComponent extends HTMLElement {
             })
     }
     private render(users: Array<User>) {
+        const userClicked = (user: User) => {
+            alert(`user ${user.name} selected`)
+            this.dispatchEvent(new CustomEvent(USER_SELECTED_EVENT, {detail: {user}}))
+        }
+        var rows = users.map(user => rowTemplate(user, user => userClicked(user)))
+        const tableTemplate = html`
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <table class="w3-table-all">
+                <thead>
+                    <tr>
+                        <th>Id</th><th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${rows}
+                </tbody>
+            </table>
+        `
         render(tableTemplate, this.shadowRoot)
-
-        const tbody = this.shadowRoot.querySelector("tbody")
-        users.forEach(user => {
-            const row = tbody.insertRow()
-            row.onclick = () => {
-                const event = new CustomEvent(USER_SELECTED_EVENT, {detail: {user}})
-                this.dispatchEvent(event)
-            }
-            render(rowTemplate(user), row)
-        });
     }
 }
 

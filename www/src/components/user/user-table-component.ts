@@ -10,10 +10,14 @@ const rowTemplate = (user: User, onclick: (user: User) => void) => html`
         <td >${user.id}</td><td>${user.name}</td>
     </tr>
 `
-class UserTableComponent extends HTMLElement {
+export class UserTableComponent extends HTMLElement {
+    private _updateComplete = false
     constructor() {
         super()
         this.attachShadow({ mode: "open" })
+    }
+    get updateComplete(): Boolean {
+        return this._updateComplete
     }
     connectedCallback() {
         console.log("connected usertable")
@@ -27,7 +31,8 @@ class UserTableComponent extends HTMLElement {
                 this.render(users)
             })
     }
-    private render(users: Array<User>) {
+    render(users: Array<User>) {
+        this._updateComplete = false
         const userClicked = (user: User) => {
             alert(`user ${user.name} selected`)
             this.dispatchEvent(new CustomEvent(USER_SELECTED_EVENT, {detail: {user}}))
@@ -47,6 +52,7 @@ class UserTableComponent extends HTMLElement {
             </table>
         `
         render(tableTemplate, this.shadowRoot)
+        this._updateComplete = true
     }
 }
 

@@ -4,7 +4,7 @@ const template = html`
     <div>TODO: implement this</div>
 ` 
 
-class UserComponent extends HTMLElement{
+class UserComponent extends HTMLElement {
     constructor() {
         super()
         this.attachShadow({mode: "open"})

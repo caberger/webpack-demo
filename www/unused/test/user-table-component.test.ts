@@ -1,7 +1,7 @@
 import { html, fixture, expect } from '@open-wc/testing'
-import { UserTableComponent } from '../src/components/user/user-table-component'
-import { setUsers } from '../src/model/store';
-import { User } from '../src/model/user'
+import { UserTableComponent } from '../../src/components/user/user-table-component'
+import { setUsers } from '../../src/model/store';
+import { User } from '../../src/model/user'
 
 const users: User[] = [{id: 1, name: "John Doe"}]
 

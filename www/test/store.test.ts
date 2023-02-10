@@ -1,6 +1,6 @@
 import { suite, test } from '@testdeck/mocha'
-import store, { setUsers } from "../../src/model/store"
-import { User } from "../../src/model/user"
+import store, { setUsers } from "../src/model/store"
+import { User } from "../src/model/user"
 import * as chai from "chai"
 import { map } from 'rxjs'
 

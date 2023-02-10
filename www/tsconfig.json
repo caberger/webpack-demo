@@ -13,6 +13,8 @@
       "inlineSources": true,
       "rootDir": "./"
     },
-    "include": ["**/*.ts"],
-    "exclude": [ "unused/**/*"]
-  }
+    "exclude": [
+      "test/**/*",
+      "unused/**/*"],
+    "include": ["**/*.ts"]
+    }

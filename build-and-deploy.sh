@@ -5,7 +5,7 @@ mvn clean
 mvn package install || exit
 popd
 
-pushd www
+pushd frontend/www
 npm install
 npm run build || exit
 popd
@@ -14,6 +14,6 @@ pushd k8s
 ./deploy.sh
 popd
 
-pushd www
+pushd frontend/www
 ./deploy.sh
 popd

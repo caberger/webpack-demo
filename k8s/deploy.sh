@@ -1,7 +1,16 @@
-
+#!/usr/bin/env bash
 
 bold=$(tput bold)
 normal=$(tput sgr0)
+
+IS_DOCKER_DESKTOP=$(kubectl get nodes | grep "docker-desktop"| wc -l)
+
+if [[ "$IS_DOCKER_DESKTOP" -eq "1" ]]
+then
+    kubectl apply -f docker-desktop/docker-standard-storage-class.yaml
+else
+    echo "not docker desktop, standard storage class exists"
+fi
 
 docker image tag caberger/webpack-demo:1.0.0-SNAPSHOT ghcr.io/caberger/webpack-demo:latest
 docker push ghcr.io/caberger/webpack-demo:latest

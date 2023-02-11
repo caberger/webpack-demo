@@ -1,5 +1,4 @@
 import { Builder, By, WebDriver } from "selenium-webdriver"
-import { strict as assert } from "node:assert"
 import { expect } from "chai"
 
 const URL = "https://www.htl-leonding.at/"

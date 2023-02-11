@@ -5,7 +5,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: knife
-  namespace: student-c-aberger
+
 spec:
   replicas: 1
   selector:

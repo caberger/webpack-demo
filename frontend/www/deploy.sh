@@ -5,7 +5,7 @@ npm run build
 
 KNIFE_POD=""
 findPod() {
-    KNIFE_POD=$(kubectl -n student-c-aberger get pods|grep -i Running|grep knife|cut -d\  -f 1)
+    KNIFE_POD=$(kubectl get pods|grep -i Running|grep knife|cut -d\  -f 1)
 }
 waitForPod() {
     local pod=""
@@ -19,6 +19,6 @@ waitForPod() {
 waitForPod knife
 
 echo "copy to demo..."
-kubectl -n student-c-aberger exec $KNIFE_POD -- rm -rf /srv/demo /srv/dist
-kubectl -n student-c-aberger cp ./dist $KNIFE_POD:/srv/
-kubectl -n student-c-aberger exec $KNIFE_POD -- mv /srv/dist /srv/demo
+kubectl exec $KNIFE_POD -- rm -rf /srv/demo /srv/dist
+kubectl cp ./dist $KNIFE_POD:/srv/
+kubectl exec $KNIFE_POD -- mv /srv/dist /srv/demo

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
-  namespace: student-c-aberger
+
 spec:
   replicas: 1
   selector:
@@ -41,7 +41,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx
-  namespace: student-c-aberger
+
 spec:
   ports:
     - port: 80
@@ -54,7 +54,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-config
-  namespace: student-c-aberger
+
 data:
   default.conf: |
     server {
@@ -75,7 +75,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
   name: nginx-www
-  namespace: student-c-aberger
+
   annotations:
     nfs.io/storage-path: "nginx-www"
 spec:

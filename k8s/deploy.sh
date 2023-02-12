@@ -8,6 +8,7 @@ IS_DOCKER_DESKTOP=$(kubectl get nodes | grep "docker-desktop"| wc -l)
 if [[ "$IS_DOCKER_DESKTOP" -eq "1" ]]
 then
     kubectl apply -f docker-desktop/docker-standard-storage-class.yaml
+    kubectl apply -f docker-desktop/knife.yaml
 else
     echo "not docker desktop, standard storage class exists"
 fi

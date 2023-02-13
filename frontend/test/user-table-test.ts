@@ -2,6 +2,10 @@ import { Builder, By, WebDriver, WebElement } from "selenium-webdriver"
 import { expect } from "chai"
 
 const URL = "http://localhost:4200/"
+/** Test the user-table custom element.
+ * When the application server hast been launched with drop-and create the appropriate content should be in the database.
+ */
+
 describe("User-Table Component Tests", function() {
     let driver: WebDriver
     beforeEach(async function() {
@@ -26,16 +30,19 @@ describe("User-Table Component Tests", function() {
         expect(headers[0]).to.equal("Id")
         expect(headers[1]).to.equal("Name")
     })
-    /*
     it ("should contain Max Mustermann given table filled with Demo Data", async function() {
         const root = await findUserTableShadowRoot(driver)
-        const rows = await root.findElements(By.css("table > tbody > tr"))
-        //const names = new Array<String>()
-        //const promises: Array<Promise<WebElement>> = rows.map((row: WebElement) => row.getText())
-        //const 
-
+        const rows: WebElement[] = await root.findElements(By.css("table > tbody > tr"))
+        expect(rows).to.have.lengthOf(4)
+        const row0 = rows[0]
+        const tds = await rows[0].findElements(By.css("td"))
+        expect(tds).to.have.lengthOf(2)
+        const id = await tds[0].getText()
+        expect(id).to.equal("1")
+        const name = await tds[1].getText()
+        expect(name).to.equal("Max Mustermann")
     })
-    */
+    
 })
 
 async function findUserTableShadowRoot(driver: WebDriver) {

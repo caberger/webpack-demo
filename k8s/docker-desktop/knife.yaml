@@ -1,6 +1,6 @@
 # The swiss army knife for kubernetes
-# we start this pod on docker-desktop, because we have no jobs here.
-# do not forget to remove this deployment after the www-contents is copied to the volume
+# We can start it as a deployment also.
+# Do not forget to remove this deployment after the www-contents is copied to the volume
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,8 +23,8 @@ spec:
           args: 
             - mkdir -p /srv/demo;
               echo "<html><head></head><body>Copy your web app to this location on this persistent volume.<br/>To the api ==> <a href="./api/user">./api/user</a></body></html>" > /srv/demo/index.html;
-              sleep 900;
-              echo done;
+              tail -f /dev/null
+              echo "this line is never reached. This is not a job, so delete the deployment when done with your work."
           ports:
             - containerPort: 80    
           volumeMounts:

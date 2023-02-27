@@ -1,5 +1,5 @@
 # webpack-demo
-Demo for school usage: Quarkus Application Server Backend, Single Source Or Truth Web-Application, kubernetes Cloud Computing
+Demo for school usage: Quarkus Application Server Backend, Single Source Of Truth Web-Application, Kubernetes Cloud Computing
 
 ## Overview
 

@@ -1,8 +1,13 @@
 # kubernetes deployment
 
+For Demonstration the Deployment is done with 2 different methods:
+-  we deploy the docker image from our own ghcr.io registry
+- for the web application we use a standard nginx image that mounts the web-contents from a read only persistent volume. A Busybox - job mounts the volume for copying the web-content files to this volume when the deployment is done.
+
 ## Docker registry
-create a personal access token with write packages permission in github
-login to ghcr.io using your github username as name and the generated access token as password
+create a personal access token with write packages permission in github.
+
+Then login to ghcr.io from the command line using your github username as name and the generated access token as password
 
 ```bash
 docker login ghcr.io
@@ -20,7 +25,6 @@ on osx run:
 ~~~bash
 minikube start --driver=hyperkit 
 ~~~
-
 
 ## deploy
 NOTE: You must change caberger to your own github user name in ./deploy.sh

@@ -34,24 +34,40 @@ Examples are:
 - nodejs
 - npm
 - VS-Code or Intellij
-- portman or docker
+- docker
 - minikube
 - kubectl
 
-When using podman it is necessary to set the docker alias:
-~~~bash
-alias docker=podman
-~~~
-
-## MacOS and Linux
+## MacOS
 Should work out-of-the box
+
+## Linux
+First [install docker](https://docs.docker.com/engine/install/ubuntu/).
+Then add your user to the docker group:
+~~~bash
+sudo usermod -aG docker $USER
+~~~
+Then logout and login again.
+
+Now you can start docker with:
+~~~bash
+sudo service docker start
+~~~
+There is a script [./k8s/install-kube.sh](./k8s/install-kube.sh) to install minikube and kubectl on Ubuntu.
+
+After that start minikube and check that minikube is ready:
+~~~bash
+minikube start
+minikube addons enable dashboard
+minikube addons enable metrics-server
+minikube dashboard
+kubectl get nodes
+~~~
 
 ## Windows
 Windows users should install [Ubuntu on wsl2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview).
 And then continue using the instructions for linux.
 
-# Installation of Minikube and kubectl (Linux)
-There is a script [./k8s/install-kube.sh](./k8s/install-kube.sh) to install minikube and kubectl on Ubuntu.
 
 
 # Docker-Desktop instead of minikube

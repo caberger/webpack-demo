@@ -20,22 +20,38 @@ Then run
 ./build-and-deploy.sh
 ```
 
-## Requirements
+# Platforms
+You can run the application on any kubernetes Platform. 
+Examples are:
+- [minikube](https://minikube.sigs.k8s.io/docs/)
+- Docker - Desktop
+- LeoCloud (https://cloud.htl-leonding.ac.at/)
+- any other cloud ...
 
+# Requirements
 - jdk
 - maven
 - nodejs
 - npm
 - VS-Code or Intellij
-- portman
+- portman or docker
 - minikube
 - kubectl
+
+When using podman it is necessary to set the docker alias:
+~~~bash
+alias docker=podman
+~~~
 
 ## MacOS and Linux
 Should work out-of-the box
 
 ## Windows
 Windows users should install [Ubuntu on wsl2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-10#1-overview).
+And then continue using the instructions for linux.
+
+# Installation of Minikube and kubectl (Linux)
+There is a script [./k8s/install-kube.sh](./k8s/install-kube.sh) to install minikube and kubectl on Ubuntu.
 
 
 # Docker-Desktop instead of minikube
@@ -47,5 +63,5 @@ kubectl apply -f k8s/docker-desktop/docker-standard-storage-class.yaml
 
 ### Installation example for Ubuntu 22
 ~~~bash
-sudo apt install -y openjdk-17-jdk maven nodejs npm
+sudo apt install -y openjdk-17-jdk maven nodejs npm podman
 ~~~

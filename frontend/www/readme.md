@@ -23,3 +23,7 @@ The following technologies are used[^learning]:
 for a visualization of rxjs also see [RxMarbles](https://rxmarbles.com/)
 
 [^learning]: In parts this technology stack builds one on the other. For learning I recommend to study the things from the bottom up. As a precondition a good understanding of linux and javascript and a development environment is required.
+
+## Note about the document base url
+
+When deploying to a subfolder of the www root folder you need a *base href=".."* tag so that all links load from the correct location. This is inserted by a script in [index.html](index.html).

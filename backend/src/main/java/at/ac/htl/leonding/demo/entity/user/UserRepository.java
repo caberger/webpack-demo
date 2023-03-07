@@ -13,4 +13,12 @@ public class UserRepository {
     public List<User> getAll() {
         return em.createQuery("from User", User.class).getResultList();
     }
+    public User get(int id) {
+        return em.find(User.class, id);
+    }
+    public User insert(User user) {
+        var savedUser = em.merge(user);
+        em.flush();
+        return savedUser;
+    }
 }

@@ -11,14 +11,14 @@ import javax.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
     public int getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getName() {

@@ -2,3 +2,11 @@
 
 ### Users ###
 GET {{BASE}}/user
+
+### save ###
+POST {{BASE}}/user
+Content-Type: application/json
+
+{
+    "name": "Jane Doe"
+}

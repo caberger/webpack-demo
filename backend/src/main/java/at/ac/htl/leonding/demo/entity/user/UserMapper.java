@@ -1,6 +1,6 @@
 package at.ac.htl.leonding.demo.entity.user;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class UserMapper {

@@ -1,4 +1,4 @@
-import produce from "immer"
+import { produce } from "immer"
 import { BehaviorSubject } from "rxjs"
 import { Model } from "./model"
 import { User } from "./user"

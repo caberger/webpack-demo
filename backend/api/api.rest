@@ -1,4 +1,4 @@
-@BASE=http://127.0.0.1:8080/api
+@BASE=http://localhost:4200/api
 
 ### Users ###
 GET {{BASE}}/user

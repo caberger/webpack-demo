@@ -24,7 +24,6 @@ Then run
 You can run the application on any kubernetes Platform. 
 Examples are:
 - [minikube](https://minikube.sigs.k8s.io/docs/)
-- Docker - Desktop
 - LeoCloud (https://cloud.htl-leonding.ac.at/)
 - any other cloud ...
 
@@ -34,7 +33,7 @@ Examples are:
 - nodejs
 - npm
 - VS-Code or Intellij
-- docker
+- Podman
 - minikube
 - kubectl
 
@@ -81,3 +80,12 @@ kubectl apply -f k8s/docker-desktop/docker-standard-storage-class.yaml
 ~~~bash
 sudo apt install -y openjdk-17-jdk maven nodejs npm podman
 ~~~
+
+## Technologies used:
+- [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements)
+- [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+- [HTML Template Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+- [immerjs](https://immerjs.github.io/immer/)
+- [reactive Extensions](https://rxjs.dev/)
+- Typescript
+- [Webpack](https://webpack.js.org/)

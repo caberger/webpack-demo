@@ -53,4 +53,5 @@ echo "${bold}kubectl port-forward $POD 4200:80${normal}"
 echo "=============================================="
 echo "then open http://localhost:4200 in your browser"
 
+sleep 2
 watch -t kubectl get pods

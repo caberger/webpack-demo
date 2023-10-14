@@ -11,6 +11,20 @@ This project consists of 3 parts:
 
 ## Building
 
+## Requirements
+
+1. Be sure that you have minikube installed or a configuration for any other cloud. 
+The following command must work:
+```bash
+kubectl get nodes
+```
+2. Be sure that your github user.name setting is correct, see the [git cheat sheet](https://education.github.com/git-cheat-sheet-education.pdf)
+
+```bash
+git config --list
+```
+the *user.name* displayed must be the same as your github user name where you plan to upload your docker images.
+
 The backend server must be compiled and deployed to your github container registry. 
 To be sure to have a clean start run the following:
 ```bash
@@ -25,6 +39,8 @@ Then run
 ```bash
 ./build-and-deploy.sh
 ```
+
+After that go to your githib packes view and change the package visability to public.
 
 # Platforms
 You can run the application on any kubernetes Platform. 

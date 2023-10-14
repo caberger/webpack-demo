@@ -75,19 +75,3 @@ data:
             proxy_set_header Host $host:$server_port;
         }
     }
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata: 
-  name: nginx-www
-
-  annotations:
-    nfs.io/storage-path: "nginx-www"
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: standard
-  resources:
-    requests:
-      storage: 100Mi
----

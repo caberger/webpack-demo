@@ -1,5 +1,7 @@
 import { setUsers } from "./model/store"
-const USER_URL = "./api/user"
+
+const USER_URL = "./api/users"
+
 class UserService {
     async fetchAll() {
         const response = await fetch(USER_URL)

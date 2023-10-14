@@ -45,7 +45,6 @@ pushd frontend/www
     ./deploy.sh
 popd
 
-kubectl delete job knife
 POD=$(kubectl get pods | grep nginx | cut -d\  -f 1)
 
 echo "when all pods are running enter the following:"
@@ -54,4 +53,4 @@ echo "${bold}kubectl port-forward $POD 4200:80${normal}"
 echo "=============================================="
 echo "then open http://localhost:4200 in your browser"
 
-watch kubectl get pods
+watch -t kubectl get pods

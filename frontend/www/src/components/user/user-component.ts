@@ -23,13 +23,17 @@ class UserComponent extends HTMLElement {
     }
     private template(user: User) {
         return html`
-        <div>
-            <h1>This is the user component</h1>
-            <div>TODO: render user with id ${user.id} and name ${user.name}</div>
-        </div>
-        <div>
-            <hr/>
-            <button @click=${back}>back</button>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+        <div class="container">
+            <div class="message">
+                <div class="message-header">
+                    <p  class="has-text-white is-family-monospace">This is the user component</p>
+                    <button class="delete" aria-label="delete" @click=${back}></button>
+                </div>
+                <div class="message-body">
+                    <p>TODO: render editor for user <span class="has-text-weight-bold is-family-monospace">${user.name}</span> with id ${user.id}</p>
+                </div>
+            </div>
         </div>
         `
     }

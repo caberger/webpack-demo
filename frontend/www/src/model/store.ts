@@ -3,8 +3,6 @@ import { BehaviorSubject } from "rxjs"
 import { Model } from "./model"
 import { User } from "./user"
 
-const store = createStore()
-
 export function setUsers(users: User[]) {
     let nextState = produce(store.getValue(), draft => {
         draft.users = users
@@ -12,11 +10,8 @@ export function setUsers(users: User[]) {
     store.next(nextState)
 }
 
-function createStore() {
-    const initialState: Model = {
-        users: []
-    }
-    return new BehaviorSubject<Model>(initialState)
+const initialState: Model = {
+    users: []
 }
-
-export default store
+const store = new BehaviorSubject<Model>(initialState)
+export { store }

@@ -1,44 +1,40 @@
 import { html, render } from "lit-html"
-import { USER_SELECTED_EVENT } from "."
 import { User } from "../../model/user"
 import userService from "../../user-service"
-import store from "../../model/store"
+import { store } from "Model/store"
 import { distinctUntilChanged, map } from "rxjs"
 
-const rowTemplate = (user: User, onclick: (user: User) => void) => html`
-    <tr @click=${() => onclick(user)}>
-        <td >${user.id}</td><td>${user.name}</td>
-    </tr>
-`
 export class UserTableComponent extends HTMLElement {
-    private _updateComplete = false
     constructor() {
         super()
         this.attachShadow({ mode: "open" })
-    }
-    get updateComplete(): Boolean {
-        return this._updateComplete
     }
     connectedCallback() {
         console.log("connected usertable")
         userService.fetchAll()
         store
             .pipe(
-                map(model => model.users),
-                distinctUntilChanged()
+                distinctUntilChanged(undefined, model => model.users),
+                map(model => model.users)
             )
-            .subscribe(users => {
-                this.render(users)
-            })
+            .subscribe(users => this.render(users))
     }
     render(users: Array<User>) {
-        this._updateComplete = false
         const userClicked = (user: User) => {
-            alert(`user ${user.name} selected`)
-            this.dispatchEvent(new CustomEvent(USER_SELECTED_EVENT, {detail: {user}}))
+            this.dispatchEvent(new CustomEvent("user-selected", {detail: {user}}))
         }
-        const rows = users.map(user => rowTemplate(user, userClicked))
+        const rowTemplate = (user: User) => html`
+            <tr @click=${() => userClicked(user)}>
+            <td >${user.id}</td><td>${user.name}</td>
+        </tr>
+        `
+        const rows = users.map(rowTemplate)
         const tableTemplate = html`
+            <style>
+                tbody tr:hover {
+                    cursor: pointer
+                }
+            </style>
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <table class="w3-table-all">
                 <thead>
@@ -52,7 +48,6 @@ export class UserTableComponent extends HTMLElement {
             </table>
         `
         render(tableTemplate, this.shadowRoot)
-        this._updateComplete = true
     }
 }
 

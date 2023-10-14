@@ -16,6 +16,9 @@ module.exports = env => ({
   devtool: "cheap-source-map",
   resolve: {
     extensions: ['.ts', '.js'],
+    alias: {
+      Model: path.resolve(__dirname, "src/model")
+    }
   },
   output: {
     filename: 'bundle-[fullhash].js',

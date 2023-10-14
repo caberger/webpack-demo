@@ -1,12 +1,12 @@
 import { html, render } from "lit-html"
 
-import "./user"
-import { USER_SELECTED_EVENT } from "./user"
-
-const template = html`
-    <user-table></user-table>
-    <user-component></user-component>
-`
+import "./user/user-component"
+import "./user/user-table-component"
+import { store } from "Model/store"
+import { distinctUntilChanged } from "rxjs"
+import { Model } from "Model/model"
+import { User } from "Model/user"
+import { produce } from "immer"
 
 class AppComponent extends HTMLElement {
     constructor() {
@@ -14,20 +14,25 @@ class AppComponent extends HTMLElement {
         this.attachShadow({mode: "open"})
     }
     connectedCallback() {
-        console.log("app component connected")
-        this.render()
+        store
+            .pipe(distinctUntilChanged())
+            .subscribe(model => this.render(model))
     }
-    private render() {
-        render(template, this.shadowRoot)
-        const userTableComponent = this.shadowRoot.querySelector<HTMLElement>("user-table")
-        const userComponent = this.shadowRoot.querySelector<HTMLElement>("user-component")
-        userTableComponent.addEventListener(USER_SELECTED_EVENT, (e: CustomEvent) => {
-            const user = e.detail.user
-            userComponent.setAttribute("selected-user", user.id)
-            userComponent.style.display = "block"
-            userTableComponent.style.display = "none"
-            console.log("event: user selected:", user)
+    private template(model: Model) {
+        return html`
+            <user-table ?hidden=${!!model.currentUser} @user-selected=${(e: CustomEvent) => this.userSelected(e.detail.user)}></user-table>
+            <user-component ?hidden=${!model.currentUser}></user-component>
+        `
+    }
+    userSelected(user: User) {
+        console.log("user selected", user)
+        const nextState = produce(store.getValue(), model => {
+            model.currentUser = user
         })
+        store.next(nextState)
+    }
+    private render(model: Model) {
+        render(this.template(model), this.shadowRoot)
     }
 }
 customElements.define("app-component", AppComponent)

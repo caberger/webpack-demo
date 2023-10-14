@@ -1,20 +1,24 @@
 {
     "compilerOptions": {
-      "outDir": "dist",
+      "esModuleInterop": true,
       "module": "esnext",
       "target": "es2018",
-      "lib": ["es2017", "dom"],
+      "outDir": "dist",
       "moduleResolution": "node",
-      "esModuleInterop": false,
       "allowSyntheticDefaultImports": true,
       "experimentalDecorators": true,
       "importHelpers": true,
       "sourceMap": true,
       "inlineSources": true,
-      "rootDir": "./"
+      "rootDir": "./",
+      "baseUrl": "./",
+      "paths": {
+        "Model/*": ["src/model/*"]
+      }
     },
     "exclude": [
       "test/**/*",
       "unused/**/*"],
-    "include": ["**/*.ts"]
+    "include": [
+      "src/**/*"]
     }

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 npm install
 npm run build
@@ -9,11 +10,13 @@ findPod() {
 }
 waitForPod() {
     local pod=""
-    while [ "$KNIFE_POD." == "." ]; do
-        findPod $1
-        echo "waiting for busybox pod to be ready..."        
-        sleep 1
-    done;
+    while [ "$KNIFE_POD." == "." ]
+    do
+        findPod
+        echo "$(kubectl get pods | grep knife)"
+        echo "waiting for our swiss army knife to be ready..."        
+        sleep 2
+    done
     echo "pod $KNIFE_POD ready"
 }
 waitForPod knife

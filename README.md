@@ -12,6 +12,12 @@ This project consists of 3 parts:
 ## Building
 
 The backend server must be compiled and deployed to your github container registry. 
+To be sure to have a clean start run the following:
+```bash
+minikube delete
+./k8s/clean-all-docker.sh
+minikube start
+```
 
 Before building you must follow the steps in [readme.md](./k8s/readme.md) in the k8s folder to change the deployment target to your ghcr.io repository on github.
 

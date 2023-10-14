@@ -4,9 +4,12 @@
 docker container prune --force
 docker image prune --force
 docker volume prune --force
-echo "rmi..."
-docker rmi -f $(docker images -q)
+IMAGES=$(docker images -q)
+for image in $IMAGES
+do
+    docker rmi -f $image
+done
 
-docker image ls
 docker container ls
+docker image ls
 docker volume ls

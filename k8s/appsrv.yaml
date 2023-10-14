@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: ghcr.io/caberger/webpack-demo:latest
+          image: ghcr.io/$GITHUB_USER/webpack-demo:latest
           # remove this when stable. Currently we do not take care of version numbers
           imagePullPolicy: Always
           ports:

@@ -27,14 +27,8 @@ minikube start --driver=hyperkit
 ~~~
 
 ## deploy
-NOTE: You must change caberger to your own github user name in ./deploy.sh
 
 DO NOT FORGET: make the docker image public on ghcr.io
-
-to forward nginx to localhost:
-~~~bash
-./port-forward.sh demo nginx 4200:80
-~~~
 
 ## appsrv
 

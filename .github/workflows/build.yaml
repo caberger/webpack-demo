@@ -7,6 +7,9 @@ env:
   BACKEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
   FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
 
+permissions:
+  packages: write
+
 jobs:
   build-docker-images:
     runs-on: ubuntu-22.04

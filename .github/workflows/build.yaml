@@ -24,6 +24,7 @@ jobs:
       - name: build backend
         run: |
           ./build.sh
+          docker tag backend $BACKEND_IMAGE_NAME
           docker push $BACKEND_IMAGE_NAME
         working-directory: backend
 
@@ -36,6 +37,7 @@ jobs:
       - name: build frontend
         run: |
           ./build.sh
+          docket tag frontend $FRONTEND_IMAGE_NAME
           docker push $FRONTEND_IMAGE_NAME
         working-directory: frontend
 

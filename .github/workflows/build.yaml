@@ -1,5 +1,5 @@
 name: John Doe Application
-run-name: ${{ github.actor }} Build Project 🚀
+run-name: ${{ github.actor }} Build Project ${{ github.repository_owner }} 🚀
 on: [push]
 
 env:

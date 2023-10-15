@@ -34,24 +34,24 @@ kubectl config set-context --current --namespace $NAMESPACE || (echo "please set
 
 pushd backend
     ./build.sh || exit 4
-    kubectl rollout restart deployment/appsrv || echo "no restart ... propably not deployed yet"
+    kubectl rollout restart deployment/appsrv || echo "backend no restart ... propably not deployed yet"
+popd
+
+pushd frontend
+    ./build.sh
+    kubectl rollout restart deployment/nginx || echo "frontend no restart ... propably not deployed yet"
 popd
 
 pushd k8s
     ./deploy.sh
 popd
 
-pushd frontend/www
-    ./deploy.sh
-popd
+watch -t kubectl get pods
 
 POD=$(kubectl get pods | grep nginx | cut -d\  -f 1)
-
 echo "when all pods are running enter the following:"
 echo "=============================================="
 echo "${bold}kubectl port-forward $POD 4200:80${normal}"
 echo "=============================================="
 echo "then open http://localhost:4200 in your browser"
 
-sleep 2
-watch -t kubectl get pods

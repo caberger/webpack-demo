@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
+# unused, deprecated
 set -e
 
-
-npm install
-npm run build
-
+npm install && npm run build
+ 
 KNIFE_POD=""
 findPod() {
     KNIFE_POD=$(kubectl get pods|grep -i Running|grep knife|cut -d\  -f 1)
@@ -29,7 +28,10 @@ echo "waiting for our swiss army knife..."
 waitForPod knife
 
 echo "copy to demo..."
-kubectl exec $KNIFE_POD -- rm -rf /srv/demo /srv/dist
-kubectl cp ./dist $KNIFE_POD:/srv/
-kubectl exec $KNIFE_POD -- mv /srv/dist /srv/demo
+kubectl exec $KNIFE_POD -- rm -rf /srv/*
+pushd ./dist/
+    ls -l
+    pwd
+    kubectl cp frontend $KNIFE_POD:/srv/
+popd
 kubectl delete job knife

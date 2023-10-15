@@ -3,7 +3,7 @@
 set -e
 
 rm -rf target
-mvn -Dquarkus.container-image.group=$GITHUB_USER clean package || exit 1
+mvn clean package
 mkdir -p target/deploy
 cp target/*-runner.jar target/deploy/
-docker build -t appsrv -f ./src/main/docker/Dockerfile ./target/deploy
+docker build -t backend -f ./src/main/docker/Dockerfile ./target/deploy

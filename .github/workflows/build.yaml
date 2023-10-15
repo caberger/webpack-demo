@@ -7,27 +7,17 @@ env:
   BACKEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
   FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/frontend:latest"
 
+permissions:
+  packages: write
+  contents: read
+
 jobs:
-  build-docker-images:
+  frontend:
     runs-on: ubuntu-22.04
-    permissions:
-      packages: write
-      contents: read
     steps:
       - run: echo "triggered by a ${{ github.event_name }} on ${{ runner.os }} repo ${{ github.repository }} branch ${{ github.ref }} ."
       - name: Check out repository code
         uses: actions/checkout@v4
-
-      - uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '17'
-          cache: maven
-
-      - name: build backend
-        run: |
-          ./build.sh
-        working-directory: backend
 
       - uses: actions/setup-node@v3
         with:
@@ -45,9 +35,39 @@ jobs:
        
       - name: push docker images
         run: |
-          echo "tag backend $BACKEND_IMAGE_NAME and frontend $FRONTEND_IMAGE_NAME"
-          docker tag backend $BACKEND_IMAGE_NAME
-          docker push $BACKEND_IMAGE_NAME
+          echo "frontend  as $FRONTEND_IMAGE_NAME"
           docker tag frontend $FRONTEND_IMAGE_NAME
           docker push $FRONTEND_IMAGE_NAME
-    
+  
+  backend:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: maven
+
+      - name: build backend
+        run: |
+          ./build.sh
+        working-directory: backend
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: push backend docker image
+        run: |
+          echo "tag backend $BACKEND_IMAGE_NAME "
+          docker tag backend $BACKEND_IMAGE_NAME
+          docker push $BACKEND_IMAGE_NAME
+
+  done:
+    runs-on: ubuntu-22.04
+    needs:
+      - backend
+      - frontend
+    steps:
+      - run: |
+          echo "you can now pull $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME"
+          echo "do not forget to make them public"

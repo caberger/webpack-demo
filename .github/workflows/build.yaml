@@ -68,6 +68,7 @@ jobs:
       - backend
       - frontend
     steps:
-      - run: |
+      - name: done
+        run: |
           echo "you can now pull $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME"
           echo "do not forget to make them public"

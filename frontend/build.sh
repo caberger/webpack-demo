@@ -12,4 +12,4 @@ popd
 
 cp ./docker/default.conf ./target/nginx/
 
-docker build -t frontend -f ./docker/Dockerfile ./target/
+docker build --quiet --tag frontend --file ./docker/Dockerfile ./target/

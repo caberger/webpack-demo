@@ -4,7 +4,8 @@ on: [push]
 
 env:
   GITHUB_USER: ${{ github.actor }}
-  IMAGE_NAME: "ghcr.io/${{ github.actor }}/backend:latest"
+  BACKEND_IMAGE_NAME: "ghcr.io/${{ github.actor }}/backend:latest"
+  FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.actor }}/backend:latest"
 
 jobs:
   build-docker-images:
@@ -23,6 +24,7 @@ jobs:
       - name: build backend
         run: |
           ./build.sh
+          docker push $BACKEND_IMAGE_NAME
         working-directory: backend
 
       - uses: actions/setup-node@v3
@@ -34,6 +36,8 @@ jobs:
       - name: build frontend
         run: |
           ./build.sh
+          docker push $FRONTEND_IMAGE_NAME
         working-directory: frontend
+
     
     

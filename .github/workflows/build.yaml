@@ -1,5 +1,5 @@
 name: John Doe Application
-run-name: Build Project for s${{ github.repository_owner }} as actor ${{ github.actor }} 🚀
+run-name: Build Project for ${{ github.repository_owner }} as actor ${{ github.actor }} 🚀
 on: [push]
 
 env:
@@ -39,6 +39,9 @@ jobs:
           ./build.sh
         working-directory: frontend
       
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+       
       - name: push docker images
         run: |
           echo "tag backend $BACKEND_IMAGE_NAME and frontend $FRONTEND_IMAGE_NAME"
@@ -46,5 +49,4 @@ jobs:
           docker push $BACKEND_IMAGE_NAME
           docker tag frontend $FRONTEND_IMAGE_NAME
           docker push $FRONTEND_IMAGE_NAME
-      
     

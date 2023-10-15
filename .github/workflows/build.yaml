@@ -7,8 +7,7 @@ env:
   BACKEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
   FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
 
-permissions:
-  packages: write
+permissions: write-all
 
 jobs:
   build-docker-images:
@@ -27,8 +26,6 @@ jobs:
       - name: build backend
         run: |
           ./build.sh
-          docker tag backend $BACKEND_IMAGE_NAME
-          docker push $BACKEND_IMAGE_NAME
         working-directory: backend
 
       - uses: actions/setup-node@v3
@@ -40,9 +37,13 @@ jobs:
       - name: build frontend
         run: |
           ./build.sh
-          docket tag frontend $FRONTEND_IMAGE_NAME
-          docker push $FRONTEND_IMAGE_NAME
         working-directory: frontend
-
-    
+      
+      - name: push docker images
+        run: |
+          docker tag backend $BACKEND_IMAGE_NAME
+          docker push $BACKEND_IMAGE_NAME
+          docker tag frontend $FRONTEND_IMAGE_NAME
+          docker push $FRONTEND_IMAGE_NAME
+      
     

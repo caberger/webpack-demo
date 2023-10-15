@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "tagging frontend as $FRONTEND_IMAGE_NAME..."
           docker tag frontend $FRONTEND_IMAGE_NAME
-          docker --quiet push $FRONTEND_IMAGE_NAME
+          docker push $FRONTEND_IMAGE_NAME
   
   backend:
     runs-on: ubuntu-22.04
@@ -62,7 +62,7 @@ jobs:
         run: |
           echo "tagging backend $BACKEND_IMAGE_NAME"
           docker tag backend $BACKEND_IMAGE_NAME
-          docker --quiet push $BACKEND_IMAGE_NAME
+          docker push $BACKEND_IMAGE_NAME
 
   done:
     runs-on: ubuntu-22.04

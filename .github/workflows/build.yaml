@@ -72,6 +72,6 @@ jobs:
         run: |
           echo "# Demo Docker images pushed" >> $GITHUB_STEP_SUMMARY
           echo "## Steps to do" >> $GITHUB_STEP_SUMMARY
-          echo "- do not forget to make $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME" >> $GITHUB_STEP_SUMMARY
+          echo "- do not forget to make **$BACKEND_IMAGE_NAME** and **$FRONTEND_IMAGE_NAME** public" >> $GITHUB_STEP_SUMMARY
           echo "- refresh the deployments in your cloud" >> $GITHUB_STEP_SUMMARY
 

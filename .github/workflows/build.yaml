@@ -5,13 +5,14 @@ on: [push]
 env:
   GITHUB_USER: ${{ github.repository_owner }}
   BACKEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
-  FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
+  FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/frontend:latest"
 
 jobs:
   build-docker-images:
     runs-on: ubuntu-22.04
     permissions:
       packages: write
+      contents: read
     steps:
       - run: echo "triggered by a ${{ github.event_name }} on ${{ runner.os }} repo ${{ github.repository }} branch ${{ github.ref }} ."
       - name: Check out repository code

@@ -70,10 +70,8 @@ jobs:
     steps:
       - name: done
         run: |
-          echo <<EOF >> $GITHUB_STEP_SUMMARY
-            # Demo Docker images pushed
-            ## Steps to do
-            - do not forget to make $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME
-            - refresh the deployments in your cloud
-          EOF
+          echo "# Demo Docker images pushed" >> $GITHUB_STEP_SUMMARY
+          echo "## Steps to do" >> $GITHUB_STEP_SUMMARY
+          echo "- do not forget to make $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME" >> $GITHUB_STEP_SUMMARY
+          echo "- refresh the deployments in your cloud" >> $GITHUB_STEP_SUMMARY
 

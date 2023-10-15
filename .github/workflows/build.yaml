@@ -70,5 +70,6 @@ jobs:
     steps:
       - name: done
         run: |
-          echo "you can now pull $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME"
-          echo "do not forget to make them public"
+          echo "you can now pull $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME" >> $GITHUB_STEP_SUMMARY
+          echo "do not forget to make the packages public" >> $GITHUB_STEP_SUMMARY
+

@@ -41,6 +41,7 @@ jobs:
       
       - name: push docker images
         run: |
+          echo "tag backend $BACKEND_IMAGE_NAME and frontend $FRONTEND_IMAGE_NAME"
           docker tag backend $BACKEND_IMAGE_NAME
           docker push $BACKEND_IMAGE_NAME
           docker tag frontend $FRONTEND_IMAGE_NAME

@@ -7,11 +7,11 @@ env:
   BACKEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
   FRONTEND_IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/backend:latest"
 
-permissions: write-all
-
 jobs:
   build-docker-images:
     runs-on: ubuntu-22.04
+    permissions:
+      packages: write
     steps:
       - run: echo "triggered by a ${{ github.event_name }} on ${{ runner.os }} repo ${{ github.repository }} branch ${{ github.ref }} ."
       - name: Check out repository code

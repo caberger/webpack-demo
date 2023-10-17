@@ -111,3 +111,10 @@ sudo apt install -y openjdk-17-jdk maven nodejs npm podman
 - [reactive Extensions](https://rxjs.dev/)
 - Typescript
 - [Webpack](https://webpack.js.org/)
+
+## Rootles minikube
+
+```bash
+minikube config set rootless true
+minikube start --driver=podman --container-runtime=containerd
+```

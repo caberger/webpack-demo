@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: ghcr.io/$GITHUB_USER/backend:latest
+          image: ghcr.io/$LC_GH_USER_NAME/backend:latest
           # remove this when stable. Currently we do not take care of version numbers
           imagePullPolicy: Always
           ports:

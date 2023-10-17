@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-BACKEND_IMAGE_NAME=ghcr.io/$GITHUB_USER/backend:latest
-FRONTEND_IMAGE_NAME=ghcr.io/$GITHUB_USER/frontend:latest
+# docker package names cannot contain uppercase letters:
+LC_GH_USER_NAME="$(echo "$GITHUB_USER" | tr '[:upper:]' '[:lower:]')"
+
+BACKEND_IMAGE_NAME=ghcr.io/$LC_GH_USER_NAME/backend:latest
+FRONTEND_IMAGE_NAME=ghcr.io/$LC_GH_USER_NAME/frontend:latest
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -37,7 +40,7 @@ build_yamlfiles() {
     do
         yamlfile=$yaml.yaml
         echo "yamlfile is $yamlfile"
-        envsubst '$GITHUB_USER,BASE_HREF' < $yamlfile > ./target/$yamlfile
+        envsubst '$LC_GH_USER_NAME,BASE_HREF' < $yamlfile > ./target/$yamlfile
     done
     pushd target
         for yaml in *.yaml

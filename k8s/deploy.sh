@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
+GITHUB_USER="$(echo "$GITHUB_USER" | tr '[:upper:]' '[:lower:]')"
 BACKEND_IMAGE_NAME=ghcr.io/$GITHUB_USER/backend:latest
 FRONTEND_IMAGE_NAME=ghcr.io/$GITHUB_USER/frontend:latest
 

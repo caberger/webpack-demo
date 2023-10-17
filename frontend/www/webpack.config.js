@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
+const webpack = require('webpack')
 
+const baseHref = "/"
 module.exports = env => ({
   entry: './src/index.ts',
   mode: "development",
@@ -25,9 +27,12 @@ module.exports = env => ({
     path: path.resolve(__dirname, '../target/frontend'),
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: "index.html"
-    })
+      new HtmlWebpackPlugin({
+        template: "index.html"
+      }),
+      new webpack.EnvironmentPlugin({
+        BASE_HREF: baseHref
+      })
     ],
     devServer: {
         static: {

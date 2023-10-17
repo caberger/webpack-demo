@@ -10,7 +10,6 @@ export class UserTableComponent extends HTMLElement {
         this.attachShadow({ mode: "open" })
     }
     connectedCallback() {
-        console.log("connected usertable")
         userService.fetchAll()
         store
             .pipe(

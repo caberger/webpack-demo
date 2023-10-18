@@ -14,4 +14,8 @@ const initialState: Model = {
     users: []
 }
 const store = new BehaviorSubject<Model>(initialState)
+
+export let getCurrentUser = (model: Model) => model.users.find(user => user.id == model.currentUserId)
+export let setCurrentCustomer = (id: number) => store.next(produce(store.getValue(), model => {model.currentUserId = id}))
+
 export { store }

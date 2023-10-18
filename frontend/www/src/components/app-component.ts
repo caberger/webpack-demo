@@ -20,16 +20,12 @@ class AppComponent extends HTMLElement {
     }
     private template(model: Model) {
         return html`
-            <user-table ?hidden=${!!model.currentUser} @user-selected=${(e: CustomEvent) => this.userSelected(e.detail.user)}></user-table>
-            <user-component ?hidden=${!model.currentUser}></user-component>
+            <user-table ?hidden=${!!model.currentUserId} @user-selected=${(e: CustomEvent) => this.userSelected(e.detail.user)}></user-table>
+            <user-component ?hidden=${!model.currentUserId}></user-component>
         `
     }
     userSelected(user: User) {
-        console.log("user selected", user)
-        const nextState = produce(store.getValue(), model => {
-            model.currentUser = user
-        })
-        store.next(nextState)
+        store.next(produce(store.getValue(), model => {model.currentUserId = user.id}))
     }
     private render(model: Model) {
         render(this.template(model), this.shadowRoot)

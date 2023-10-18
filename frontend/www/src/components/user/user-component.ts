@@ -1,8 +1,9 @@
-import { produce } from "immer"
 import { html, render } from "lit-html"
+import { getCurrentUser, setCurrentCustomer } from "Model/store"
 import { store } from "Model/store"
 import { User } from "Model/user"
 import { distinctUntilChanged, filter, map } from "rxjs"
+import { router } from "../../router/router"
 
 class UserComponent extends HTMLElement {
     constructor() {
@@ -15,8 +16,8 @@ class UserComponent extends HTMLElement {
     connectedCallback() {
         store
             .pipe(
-                distinctUntilChanged(undefined, model => model.currentUser),
-                map(model => model.currentUser),
+                distinctUntilChanged(undefined, model => getCurrentUser(model)),
+                map(model => getCurrentUser(model)),
                 filter(user => !!user)
             )
             .subscribe(user => this.render(user))
@@ -28,7 +29,7 @@ class UserComponent extends HTMLElement {
             <div class="message">
                 <div class="message-header">
                     <p  class="has-text-white is-family-monospace">This is the user component</p>
-                    <button class="delete" aria-label="delete" @click=${back}></button>
+                    <button class="delete" aria-label="delete" @click=${() => history.back()}></button>
                 </div>
                 <div class="message-body">
                     <p>TODO: render editor for user <span class="has-text-weight-bold is-family-monospace">${user.name}</span> with id ${user.id}</p>
@@ -39,9 +40,4 @@ class UserComponent extends HTMLElement {
     }
 }
 
-function back() {
-    store.next(produce(store.getValue(), model => {
-        delete model.currentUser
-    }))
-}
 customElements.define("user-component", UserComponent)

@@ -25,6 +25,7 @@ module.exports = env => ({
   output: {
     filename: 'bundle-[fullhash].js',
     path: path.resolve(__dirname, '../target/frontend'),
+    publicPath: "/"
   },
   plugins: [
       new HtmlWebpackPlugin({
@@ -42,6 +43,7 @@ module.exports = env => ({
         port: 4200,
         proxy: {
           '/api': 'http://localhost:8080',
-        }
-    },    
+        },
+        historyApiFallback: true        
+    }   
 })

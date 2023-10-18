@@ -1,9 +1,7 @@
 import { User } from "./user"
 
-/**
- * Our readonly single source of truth model
- */
+/** Our readonly single source of truth */
 export interface Model {
-    readonly currentUser?: User
+    readonly currentUserId?: number
     readonly users: User[]
 }

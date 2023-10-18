@@ -15,6 +15,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@testdeck/mocha": "^0.3.3",
     "@types/chai": "^4.3",
+    "@types/navigo": "^8.1.2",
     "chai": "^4.3",
     "html-webpack-plugin": "^5.5",
     "mocha": "^10.2.0",
@@ -31,6 +32,7 @@
   "dependencies": {
     "immer": "^10.0",
     "lit-html": "^3.0",
+    "navigo": "^8.11.1",
     "rxjs": "^7.5.7"
   }
 }

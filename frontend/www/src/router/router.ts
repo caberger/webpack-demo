@@ -16,17 +16,11 @@ if (baseHRef) {
 
 console.log("base=", baseHRef);
 const router = new Navigo(baseHRef)
-router.on("/customers/:id", (match: Match) => {
-    console.log("route to", match.data)
-    setCurrentCustomer(parseInt(match.data.id))
 
-})
-router.on("/customers", (data) => {
-    console.log("routed to", data)
-    setCurrentCustomer(undefined)
-})
-router.on("/", () => {
-    router.navigate("/customers")
+router.on({
+    "/customers/:id": (match: Match) => setCurrentCustomer(parseInt(match.data.id)),
+    "/customers": (_: Match) => setCurrentCustomer(undefined),
+    "/": () => router.navigate("/customers")
 })
 router.resolve()
 

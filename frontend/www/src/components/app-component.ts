@@ -6,7 +6,7 @@ import { store } from "Model/store"
 import { distinctUntilChanged } from "rxjs"
 import { Model } from "Model/model"
 import { User } from "Model/user"
-import { produce } from "immer"
+import { router } from "../router/router"
 
 class AppComponent extends HTMLElement {
     constructor() {
@@ -25,7 +25,7 @@ class AppComponent extends HTMLElement {
         `
     }
     userSelected(user: User) {
-        store.next(produce(store.getValue(), model => {model.currentUserId = user.id}))
+        router.navigate(`/customers/${user.id}`)
     }
     private render(model: Model) {
         render(this.template(model), this.shadowRoot)

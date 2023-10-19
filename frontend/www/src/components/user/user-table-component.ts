@@ -33,31 +33,42 @@ export class UserTableComponent extends HTMLElement {
                 tbody tr:hover {
                     cursor: pointer
                 }
-                #content {
+                #table-container {
                     width: 30rem;
+                }
+                .container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .container {
+                    font-family: Roboto, sans-serif;
                 }
             </style>
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-            <div id="content" class="w3-container">
-                <div class="w3-card">
-                    <header class="w3-container w3-blue">
-                        <h1>Our Clients</h1>
-                    </header>
-                    <div id="table" class="w3-container">
-                        <table class="w3-table-all">
-                            <thead>
-                                <tr>
-                                    <th>Id</th><th>Name</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${rows}
-                            </tbody>
-                        </table>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+            <div class="container">
+                <div id="table-container" class="w3-container">
+                    <div class="w3-card">
+                        <header class="w3-container w3-blue">
+                            <h1>Our Clients</h1>
+                        </header>
+                        <div id="table" class="w3-container">
+                            <table class="w3-table-all">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th><th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rows}
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="w3-container w3-blue">
+                            <h5>Just a demo. This component uses w3.css</h5>
+                        </footer>
                     </div>
-                    <footer class="w3-container w3-blue">
-                        <h5>Just a demo</h5>
-                    </footer>
                 </div>
             </div>
         `

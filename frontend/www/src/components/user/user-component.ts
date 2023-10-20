@@ -1,9 +1,8 @@
 import { html, render } from "lit-html"
-import { getCurrentUser, setCurrentCustomer } from "Model/store"
+import { getCurrentUser, setCurrentUser } from "Model/store"
 import { store } from "Model/store"
 import { User } from "Model/user"
 import { distinctUntilChanged, filter, map } from "rxjs"
-import { router } from "../../router/router"
 
 class UserComponent extends HTMLElement {
     constructor() {

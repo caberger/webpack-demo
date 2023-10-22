@@ -8,13 +8,13 @@ declare var process : {
 }
 const baseHRef = process.env.BASE_HREF
 if (baseHRef) {
-    const base = document.getElementById("base")
+    const base = document.querySelector("base")
     if (base) {
-        base.setAttribute("href", baseHRef)
+        console.log("base=", baseHRef)
+        //base.setAttribute("href", baseHRef)
     }
 }
 
-console.log("base=", baseHRef);
 const router = new Navigo(baseHRef)
 
 router.on({

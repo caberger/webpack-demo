@@ -3,7 +3,10 @@ const path = require('path')
 const webpack = require('webpack')
 
 const baseHref = "/"
-module.exports = env => ({
+module.exports = env => {
+  //const baseHref = env.baseHref ? env.baseHref : "/"
+  console.log("build with", env)
+  return {
   entry: './src/index.ts',
   mode: "development",
   module: {
@@ -25,7 +28,7 @@ module.exports = env => ({
   output: {
     filename: 'bundle-[fullhash].js',
     path: path.resolve(__dirname, '../target/frontend'),
-    publicPath: "/"
+    publicPath: baseHref
   },
   plugins: [
       new HtmlWebpackPlugin({
@@ -42,8 +45,10 @@ module.exports = env => ({
         compress: true,
         port: 4200,
         proxy: {
-          '/api': 'http://localhost:8080',
+          '/api': `http://localhost:8080`,
         },
         historyApiFallback: true        
     }   
-})
+  }
+}
+

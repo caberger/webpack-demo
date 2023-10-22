@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --env baseHref=$BASE_HREF",
     "test": "nyc ./node_modules/.bin/_mocha 'test/**/*.ts'",
     "build": "webpack build"
   },

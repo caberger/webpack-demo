@@ -9,8 +9,7 @@ mkdir -p target/nginx
 
 pushd www
     npm install
-    npm run build
-#   npm run build -- --env baseHref=$BASE_HREF
+    npm run build -- --env baseHref=$BASE_HREF
 popd
 
 cp ./docker/default.conf ./target/nginx/

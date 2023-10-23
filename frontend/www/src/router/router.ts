@@ -11,7 +11,7 @@ if (baseHRef) {
     const base = document.querySelector("base")
     if (base) {
         console.log("base=", baseHRef)
-        //base.setAttribute("href", baseHRef)
+        base.setAttribute("href", baseHRef)
     }
 }
 

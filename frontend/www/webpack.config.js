@@ -2,9 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const webpack = require('webpack')
 
-const baseHref = "/"
 module.exports = env => {
-  //const baseHref = env.baseHref ? env.baseHref : "/"
+  const baseHref = env.baseHref ? env.baseHref : "/"
   console.log("build with", env)
   return {
   entry: './src/index.ts',

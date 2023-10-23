@@ -112,9 +112,13 @@ sudo apt install -y openjdk-17-jdk maven nodejs npm podman
 - Typescript
 - [Webpack](https://webpack.js.org/)
 
-## Rootles minikube
+## Rootless minikube
 
 ```bash
 minikube config set rootless true
 minikube start --driver=podman --container-runtime=containerd
 ```
+
+## Deploy the frontend to a subfolder of a domain
+
+See [./frontend/readme.md](./frontend/readme.md) for how to set BASE_HREF

@@ -29,7 +29,7 @@ The backend server must be compiled and deployed to your github container regist
 To be sure to have a clean start run the following:
 ```bash
 minikube delete
-rm -rf  ~/.minikube/cache/
+rm -rf ~/.minikube/cache/
 ./k8s/clean-all-docker.sh
 minikube start
 ```

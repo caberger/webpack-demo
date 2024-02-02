@@ -67,7 +67,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: target/*-runner.jar
+          file: backend/target/*-runner.jar
           asset_name: backend
           tag: ${{ github.ref }}
           overwrite: true

@@ -18,21 +18,19 @@
     "@types/navigo": "^8.1.2",
     "chai": "^4.3",
     "html-webpack-plugin": "^5.5",
-    "mocha": "^10.2.0",
     "nyc": "^15.1.0",
     "ts-loader": "^9.4.1",
     "ts-mockito": "^2.6.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2",
-    "web-cli": "^1.0.0-prealpha",
     "webpack": "^5.74.0",
-    "webpack-cli": "^5.1",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "immer": "^10.0",
     "lit-html": "^3.0",
     "navigo": "^8.11.1",
-    "rxjs": "^7.5.7"
+    "rxjs": "^7.5.7",
+    "typescript": "^5.3.3",
+    "webpack-cli": "^5.1.4"
   }
 }

@@ -2,7 +2,8 @@ name: IPT/SYP Template
 run-name: Build Project for ${{ github.repository_owner }} as actor ${{ github.actor }} 🚀
 on:
   push:
-    branches: main
+    branches:
+      - main
 
 env:
   GITHUB_USER: ${{ github.repository_owner }}
@@ -15,6 +16,7 @@ permissions:
 
 jobs:
   frontend:
+    permissions: write-all
     runs-on: ubuntu-22.04
     steps:
       - run: echo "triggered by a ${{ github.event_name }} on ${{ runner.os }} repo ${{ github.repository }} branch ${{ github.ref }} ."
@@ -32,6 +34,8 @@ jobs:
       - name: pack frontend
         run: |
             tar -czf frontend.tgz target
+            pwd
+            ls -l
         working-directory: frontend
 
       - name: Upload frontend release binaries
@@ -44,7 +48,6 @@ jobs:
           overwrite: true
           body: "Frontend Demo Only Version"
           file_glob: true
-
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin

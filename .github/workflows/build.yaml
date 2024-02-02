@@ -29,7 +29,23 @@ jobs:
         run: |
           ./build.sh
         working-directory: frontend
-      
+      - name: pack frontend
+        run: |
+            tar -czf frontend.tgz target
+        working-directory: frontend
+
+      - name: Upload frontend release binaries
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: frontend/frontend.tgz
+          asset_name: frontend
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Frontend Demo Only Version"
+          file_glob: true
+
+
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
        
@@ -63,7 +79,7 @@ jobs:
           docker tag backend $BACKEND_IMAGE_NAME
           docker push $BACKEND_IMAGE_NAME
 
-      - name: Upload Release
+      - name: Upload backend release binaries
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -71,7 +87,7 @@ jobs:
           asset_name: backend
           tag: ${{ github.ref }}
           overwrite: true
-          body: "Demo Only Version"
+          body: "Backend Demo Only Version"
           file_glob: true
 
   done:

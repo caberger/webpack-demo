@@ -1,5 +1,6 @@
 # webpack-demo
-Demo for school usage: Quarkus Application Server Backend, Single Source Of Truth Web-Application, Kubernetes Cloud Computing
+Demo for school usage: Quarkus Application Server Backend, Single Source Of Truth Web-Application, Kubernetes Cloud Computing.
+Included is a Github Action to upload the compiled binaries to github as release artifacts.
 
 ## Overview
 

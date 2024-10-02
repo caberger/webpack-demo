@@ -4,21 +4,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
+  ingressClassName: nginx
   rules:
-    - host: student.cloud.htl-leonding.ac.at
+    - host: aberger.cloud.key.fit
       http:
         paths:
-          - path: /caberger
-            pathType: Prefix
-            backend:
-              service:
-                name: nginx
-                port:
-                  number: 80
-          - path: /caberger/(.*)$
+          - path: /
             pathType: Prefix
             backend:
               service:

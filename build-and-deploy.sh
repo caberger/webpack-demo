@@ -9,7 +9,7 @@ GITHUB_REPO_USER=$(git config --list | grep remote.origin.url | sed -e 's/.*=.*:
 GITHUB_USER=$(git config user.name)
 
 BASE_HREF=${BASE_HREF:-"/"}
-NAMESPACE=${NAMESPACE:-"default"}
+#NAMESPACE=${NAMESPACE:-"default"}
 
 if [[ -z ${GITHUB_USER} ]]
 then
@@ -28,9 +28,10 @@ fi
 export GITHUB_USER
 export BASE_HREF
 
-echo "building deployment using github account ${bold}$GITHUB_USER${normal}, namespace \"$NAMESPACE\" and ingress root \"$BASE_HREF\""
+docker login ghcr.io
+echo "building deployment using github account ${bold}$GITHUB_USER${normal}, and ingress root \"$BASE_HREF\""
 
-kubectl config set-context --current --namespace $NAMESPACE || (echo "please set up your cloud environment so that the following command works: ${bold}kubectl get nodes${normal}" && exit 2)
+#kubectl config set-context --current --namespace $NAMESPACE || (echo "please set up your cloud environment so that the following command works: ${bold}kubectl get nodes${normal}" && exit 2)
 
 pushd backend
     ./build.sh || exit 4
@@ -46,7 +47,9 @@ pushd k8s
     ./deploy.sh
 popd
 
-watch -t kubectl get pods
+echo "run the following to follow the deployment:"
+echo "kubectl get pods --watch"
+echo sleep 5
 
 POD=$(kubectl get pods | grep nginx | cut -d\  -f 1)
 echo "when all pods are running enter the following:"

@@ -14,4 +14,4 @@ popd
 
 cp ./docker/default.conf ./target/nginx/
 
-docker build --tag frontend --file ./docker/Dockerfile ./target/
+docker buildx build --platform linux/amd64 --tag frontend --file ./docker/Dockerfile ./target/

@@ -31,7 +31,8 @@ module.exports = env => {
   },
   plugins: [
       new HtmlWebpackPlugin({
-        template: "index.html"
+        template: "index.html",
+        scriptLoading: "module"
       }),
       new webpack.EnvironmentPlugin({
         BASE_HREF: baseHref

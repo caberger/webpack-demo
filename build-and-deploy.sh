@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#/usr/bin/env bash
 # build the application, push the docker image and deploy it on the current cluster
 
 set -e

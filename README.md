@@ -60,6 +60,7 @@ Examples are:
 - Podman
 - minikube
 - kubectl
+- getext (for envsubst)
 
 ## MacOS
 Should work out-of-the box

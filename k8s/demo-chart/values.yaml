@@ -1,0 +1,8 @@
+backend:
+  image: please-enter-your-backend-docker-image-name-here
+    
+frontend:
+  image: please-enter-your-frontend-docker-image-name-here
+
+ingress:
+  host:  please-enter-your-ingress-here (it2xxxxx.cloud.htl-leonding.ac.at)

@@ -8,8 +8,8 @@ normal=$(tput sgr0)
 GITHUB_REPO_USER=$(git config --list | grep remote.origin.url | sed -e 's/.*=.*://'| sed -e 's/\(.*\)\/.*/\1/')
 GITHUB_USER=$(git config user.name)
 
-BASE_HREF=${BASE_HREF:-"/"}
-#NAMESPACE=${NAMESPACE:-"default"}
+echo "helm must be installed..."
+helm version
 
 if [[ -z ${GITHUB_USER} ]]
 then
@@ -26,10 +26,9 @@ else
 fi
 
 export GITHUB_USER
-export BASE_HREF
 
 docker login ghcr.io
-echo "building deployment using github account ${bold}$GITHUB_USER${normal}, and ingress root \"$BASE_HREF\""
+echo "building deployment using github account ${bold}$GITHUB_USER${normal}"
 
 #kubectl config set-context --current --namespace $NAMESPACE || (echo "please set up your cloud environment so that the following command works: ${bold}kubectl get nodes${normal}" && exit 2)
 

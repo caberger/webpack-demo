@@ -26,11 +26,11 @@ spec:
               service:
                 name: appsrv
                 port:
-                  number: 80
+                  number: 8080
           - path: /ws
             pathType: Prefix
             backend:
               service:
                 name: appsrv
                 port:
-                  number: 80
+                  number: 8080

@@ -37,7 +37,22 @@ spec:
               port: 8080
             timeoutSeconds: 5
             initialDelaySeconds: 60
-            periodSeconds: 120                
+            periodSeconds: 120
+      # initContainers:
+      #   - name: wait
+      #     image: {{ .Values.postgres.image }}
+      #     command: ["/bin/bash", "-c", 'until pg_isready -h postgres; do;echo "waiting for database...";sleep 2;done']
+      #     env:
+      #       - name: POSTGRES_PASSWORD
+      #         valueFrom:
+      #           secretKeyRef:
+      #             name: postgres-admin
+      #             key: password
+      #       - name: POSTGRES_USERNAME
+      #         valueFrom:
+      #           secretKeyRef:
+      #             name: postgres-admin
+      #             key: username
 ---
 apiVersion: v1
 kind: Service

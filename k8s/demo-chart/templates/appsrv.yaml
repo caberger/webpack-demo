@@ -16,9 +16,8 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: {{ backend.image }}
-          # remove this when stable. Currently we do not take care of version numbers
-          imagePullPolicy: Always
+          image: {{ .Values.backend.image }}
+          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
           ports:
             - containerPort: 8080
           startupProbe:

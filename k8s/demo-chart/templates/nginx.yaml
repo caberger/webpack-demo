@@ -16,10 +16,9 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: {{ frontend.image }}
+          image: {{ .Values.frontend.image }}
           # remove imagePullPolicy when stable. Currently we do not take care of version numbers
-          imagePullPolicy: Always
-
+          imagePullPolicy: {{ .Values.deployment.imagePullPolicy }}
           ports:
             - containerPort: 80
           livenessProbe:
@@ -31,7 +30,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx
-
 spec:
   ports:
     - port: 80

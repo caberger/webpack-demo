@@ -1,8 +1,13 @@
+deployment:
+  imagePullPolicy: Always
+  # change this when stable. Currently we do not take care of version numbers
+
+
 backend:
-  image: please-enter-your-backend-docker-image-name-here
+  image: ghcr.io/caberger/backend:latest
     
 frontend:
-  image: please-enter-your-frontend-docker-image-name-here
+  image: ghcr.io/caberger/frontend:latest
 
 ingress:
-  host:  please-enter-your-ingress-here (it2xxxxx.cloud.htl-leonding.ac.at)
+  host:  demo.cloud.key.fit

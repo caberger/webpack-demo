@@ -1,5 +1,15 @@
+import { uniqueNamesGenerator, Config, names } from 'unique-names-generator';
+
+const config: Config = {
+  dictionaries: [names]
+}
+
+const nameInChat = uniqueNamesGenerator(config); 
+
 let socket: WebSocket = undefined
 let interval: NodeJS.Timeout = undefined
+
+
 
 function handleMessage(message: string) {
     console.log("message received:", message)
@@ -9,10 +19,10 @@ export function connectToWebsocket() {
     if (socket) {
         socket.close()
     }
-    console.log("connecting to web socket")
+    console.log(`connecting to web socket as ${nameInChat}`)
     const protocol = isCurrentWebsiteUsingSSL() ? "wss:" : "ws:"
     const baseUrl = buildURL(protocol)
-    const url = `${baseUrl}/api/ws/john`
+    const url = `${baseUrl}/api/ws/${nameInChat}`
     socket = new WebSocket(url)
     socket.onopen = function (e) {
         console.log("[open] Socket Connection established", url.substring(0, 20) + "...")

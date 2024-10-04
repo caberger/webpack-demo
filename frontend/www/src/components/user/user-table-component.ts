@@ -66,7 +66,7 @@ export class UserTableComponent extends HTMLElement {
                             </table>
                         </div>
                         <footer class="w3-container w3-blue">
-                            <h5>Just a demo. This component uses w3.css</h5>
+                            <h5>Just a demo.</h5>
                         </footer>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 name: IPT/SYP Template
-run-name: Build Project for ${{ github.repository_owner }} as actor ${{ github.actor }} 🚀
+run-name: Build Project 🚀
 on:
   push:
     branches:

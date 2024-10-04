@@ -27,6 +27,7 @@ fi
 
 export GITHUB_USER
 
+docker ps
 docker login ghcr.io
 echo "building deployment using github account ${bold}$GITHUB_USER${normal}"
 
@@ -46,4 +47,3 @@ pushd k8s
     ./deploy.sh
 popd
 
-helm install leocloud-demo  --set backend.image= ./k8s/demo-chart

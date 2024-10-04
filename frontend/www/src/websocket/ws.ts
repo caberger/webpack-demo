@@ -2,7 +2,7 @@ let socket: WebSocket = undefined
 let interval: NodeJS.Timeout = undefined
 
 function handleMessage(message: string) {
-    console.log("message received", message)
+    console.log("message received:", message)
 }
 
 export function connectToWebsocket() {

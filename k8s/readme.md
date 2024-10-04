@@ -10,10 +10,10 @@ Then login to ghcr.io from the command line using your github username as name a
 docker login ghcr.io
 ```
 
-
 ## deploy
 
 DO NOT FORGET: make the docker image public on ghcr.io
+adjust your values in ./k8s/demo-chart and the run:
 ```bash
 helm install leocloud-demo  --set backend.image=$BACKEND_IMAGE_NAME,frontend.image=$FRONTEND_IMAGE_NAME ./k8s/demo-chart"
 ```

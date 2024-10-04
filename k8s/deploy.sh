@@ -4,7 +4,6 @@ set -e
 echo "check that docker is available"
 docker ps
 
-
 # docker package names cannot contain uppercase letters:
 LC_GH_USER_NAME="$(echo "$GITHUB_USER" | tr '[:upper:]' '[:lower:]')"
 BACKEND_IMAGE_NAME=ghcr.io/$LC_GH_USER_NAME/backend:latest
@@ -24,25 +23,7 @@ then
 else
     echo "not on docker desktop, standard storage class exists, skipping."
 fi
-# build_yamlfiles() {
-#     local YAMLS="postgres appsrv nginx"
-#     local yamlfile
 
-#     mkdir -p target
-#     rm -rf ./target/*
-#     for yaml in $YAMLS
-#     do
-#         yamlfile=$yaml.yaml
-#         echo "yamlfile is $yamlfile"
-#         envsubst '\$BACKEND_IMAGE_NAME,\$FRONTEND_IMAGE_NAME,\$BASE_HREF' < $yamlfile > ./target/$yamlfile
-#     done
-#     pushd target
-#         for yaml in *.yaml
-#         do
-#             kubectl apply -f $yaml
-#         done
-#     popd
-# }
 echo "TAG and push image $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME..."
 
 docker image tag backend $BACKEND_IMAGE_NAME
@@ -61,10 +42,14 @@ echo "----------"
 echo "DO NOT FORGET: make the ${bold}docker image public${normal} on ghcr.io"
 echo "----------"
 
-build_yamlfiles() {
-    helm install --debug --dry-run leocloud-demo ./demo-chart
-}
-build_yamlfiles
+echo "run the following to follow the deployment:"
+echo "kubectl get pods --watch"
 
-echo "to install run helm install leocloud-demo ./demo-chart"
+#POD=$(kubectl get pods | grep nginx | cut -d\  -f 1)
+#echo "when all pods are running enter the following:"
+#echo "=============================================="
+#echo "${bold}kubectl port-forward $POD 4200:80${normal}"
+#echo "=============================================="
+#echo "then open http://localhost:4200 in your browser"
 
+helm install leocloud-demo  --set backend.image=$BACKEND_IMAGE_NAME,frontend.image=$FRONTEND_IMAGE_NAME ./k8s/demo-chart

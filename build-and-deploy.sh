@@ -46,14 +46,4 @@ pushd k8s
     ./deploy.sh
 popd
 
-echo "run the following to follow the deployment:"
-echo "kubectl get pods --watch"
-echo sleep 5
-
-POD=$(kubectl get pods | grep nginx | cut -d\  -f 1)
-echo "when all pods are running enter the following:"
-echo "=============================================="
-echo "${bold}kubectl port-forward $POD 4200:80${normal}"
-echo "=============================================="
-echo "then open http://localhost:4200 in your browser"
-
+helm install leocloud-demo  --set backend.image= ./k8s/demo-chart

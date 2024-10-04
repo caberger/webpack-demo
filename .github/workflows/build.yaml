@@ -17,7 +17,7 @@ permissions:
 jobs:
   frontend:
     permissions: write-all
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - run: echo "triggered by a ${{ github.event_name }} on ${{ runner.os }} repo ${{ github.repository }} branch ${{ github.ref }} ."
       - uses: actions/checkout@v4
@@ -38,17 +38,6 @@ jobs:
             ls -l
         working-directory: frontend
 
-      - name: Upload frontend release binaries
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: frontend/frontend.tgz
-          asset_name: frontend
-          tag: ${{ github.ref }}
-          overwrite: true
-          body: "Frontend Demo Only Version"
-          file_glob: true
-
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
        
@@ -60,7 +49,7 @@ jobs:
   
   backend:
     permissions: write-all
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
@@ -81,20 +70,8 @@ jobs:
           echo "tagging backend $BACKEND_IMAGE_NAME"
           docker tag backend $BACKEND_IMAGE_NAME
           docker push $BACKEND_IMAGE_NAME
-
-      - name: Upload backend release binaries
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: backend/target/*-runner.jar
-          asset_name: backend
-          tag: ${{ github.ref }}
-          overwrite: true
-          body: "Backend Demo Only Version"
-          file_glob: true
-
   done:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - backend
       - frontend

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
+echo "check that docker is available"
+docker ps
+
+
 # docker package names cannot contain uppercase letters:
 LC_GH_USER_NAME="$(echo "$GITHUB_USER" | tr '[:upper:]' '[:lower:]')"
 BACKEND_IMAGE_NAME=ghcr.io/$LC_GH_USER_NAME/backend:latest
@@ -39,10 +43,6 @@ fi
 #         done
 #     popd
 # }
-# build_yamlfiles
-build_yamlfiles() {
-    helm install --debug --dry-run goodly-guppy ./mychart
-}
 echo "TAG and push image $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME..."
 
 docker image tag backend $BACKEND_IMAGE_NAME
@@ -60,3 +60,11 @@ kubectl get pods
 echo "----------"
 echo "DO NOT FORGET: make the ${bold}docker image public${normal} on ghcr.io"
 echo "----------"
+
+build_yamlfiles() {
+    helm install --debug --dry-run leocloud-demo ./demo-chart
+}
+build_yamlfiles
+
+echo "to install run helm install leocloud-demo ./demo-chart"
+

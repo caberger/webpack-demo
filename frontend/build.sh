@@ -12,6 +12,4 @@ pushd www
     npm run build -- --env baseHref=$BASE_HREF
 popd
 
-cp ./docker/default.conf ./target/nginx/
-
 docker buildx build --platform linux/amd64 --tag frontend --file ./docker/Dockerfile ./target/

@@ -52,4 +52,5 @@ echo "kubectl get pods --watch"
 #echo "=============================================="
 #echo "then open http://localhost:4200 in your browser"
 
-helm install leocloud-demo  --set backend.image=$BACKEND_IMAGE_NAME,frontend.image=$FRONTEND_IMAGE_NAME ./k8s/demo-chart
+echo "you should run:"
+echo "helm install leocloud-demo  --set backend.image=$BACKEND_IMAGE_NAME,frontend.image=$FRONTEND_IMAGE_NAME ./k8s/demo-chart"

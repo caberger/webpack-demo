@@ -4,9 +4,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
-  annotation:
-    nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
-    nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
   ingressClassName: nginx
   rules:

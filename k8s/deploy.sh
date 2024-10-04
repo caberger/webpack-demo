@@ -20,27 +20,29 @@ then
 else
     echo "not on docker desktop, standard storage class exists, skipping."
 fi
+# build_yamlfiles() {
+#     local YAMLS="postgres appsrv nginx"
+#     local yamlfile
+
+#     mkdir -p target
+#     rm -rf ./target/*
+#     for yaml in $YAMLS
+#     do
+#         yamlfile=$yaml.yaml
+#         echo "yamlfile is $yamlfile"
+#         envsubst '\$BACKEND_IMAGE_NAME,\$FRONTEND_IMAGE_NAME,\$BASE_HREF' < $yamlfile > ./target/$yamlfile
+#     done
+#     pushd target
+#         for yaml in *.yaml
+#         do
+#             kubectl apply -f $yaml
+#         done
+#     popd
+# }
+# build_yamlfiles
 build_yamlfiles() {
-    local YAMLS="postgres appsrv nginx"
-    local yamlfile
-
-    mkdir -p target
-    rm -rf ./target/*
-    for yaml in $YAMLS
-    do
-        yamlfile=$yaml.yaml
-        echo "yamlfile is $yamlfile"
-        envsubst '\$BACKEND_IMAGE_NAME,\$FRONTEND_IMAGE_NAME,\$BASE_HREF' < $yamlfile > ./target/$yamlfile
-    done
-    pushd target
-        for yaml in *.yaml
-        do
-            kubectl apply -f $yaml
-        done
-    popd
+    helm install --debug --dry-run goodly-guppy ./mychart
 }
-build_yamlfiles
-
 echo "TAG and push image $BACKEND_IMAGE_NAME and $FRONTEND_IMAGE_NAME..."
 
 docker image tag backend $BACKEND_IMAGE_NAME

@@ -60,7 +60,7 @@ Examples are:
 - Podman
 - minikube
 - kubectl
-- getext (for envsubst)
+- helm
 
 ## MacOS
 Should work out-of-the box

@@ -12,7 +12,7 @@ export function connectToWebsocket() {
     console.log("connecting to web socket")
     const protocol = isCurrentWebsiteUsingSSL() ? "wss:" : "ws:"
     const baseUrl = buildURL(protocol)
-    const url = `${baseUrl}/ws/john`
+    const url = `${baseUrl}/api/ws/john`
     socket = new WebSocket(url)
     socket.onopen = function (e) {
         console.log("[open] Socket Connection established", url.substring(0, 20) + "...")

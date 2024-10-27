@@ -16,6 +16,11 @@
 ## backup the database
 
 ```bash
-docker exec -it postgres pg_dump -U demo
+docker exec -it postgres pg_dump -U demo > demo-backup.sql
 ```
 
+## stop the database
+
+```bash
+./down.sh
+```

@@ -10,6 +10,13 @@ do
     docker rmi -f $image
 done
 
+VOLUMES=$(docker volume ls -q)
+for volume in $VOLUMES
+do
+    docker volume rm $volume
+done
+
 docker container ls
 docker image ls
 docker volume ls
+

@@ -21,21 +21,17 @@ import jakarta.ws.rs.core.UriBuilder;
 public class UserResource {
     @Inject UserRepository userRepository;
     @Inject UserMapper userMapper;
+
     @GET
-    public List<UserDto> getUsers() {
-        return userRepository.getAll().stream().map(user -> userMapper.toResource(user)).collect(Collectors.toList());
+    public List<User> getUsers() {
+        return userRepository.listAll().stream().map(user -> userMapper.toResource(user)).collect(Collectors.toList());
     }
     
     @GET
     @Path("/{id:[0-9]+}")
-    public UserDto get(@PathParam("id") int id) {
-        return userMapper.toResource(userRepository.get(id));
-    }
-    @POST
-    @Transactional
-    public Response save(UserDto user) {
-        var savedUser = userRepository.insert(userMapper.fromResource(user));
-        var uri = UriBuilder.fromResource(UserResource.class).path(Integer.toString(savedUser.getId()).toString()).build();
-        return Response.created(uri).build();
+    public Response get(@PathParam("id") long id) {
+        final var user = userRepository.findByIdOptional(id);
+        final var response = user.isPresent() ? Response.ok(user.get())  : Response.status(Response.Status.NOT_FOUND);
+        return response.build();
     }
 }

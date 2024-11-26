@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 docker compose up --detach
-docker compose logs postgres
+#docker compose logs postgres
 
 cat << EOF
 
@@ -25,5 +25,7 @@ quarkus.http.access-log.enabled=true
 
 EOF
 
-echo "starting the log output now, press ^C and ./down.sh to stop..."
-docker compose logs -f postgres
+echo "to stop the database enter the following:"
+echo "./down.sh"
+echo "to see the postgresql logs enter the following:"
+echo "docker compose logs -f postgres"
